@@ -13,5 +13,5 @@ class Application_Model_DbTable_ImmaginiTagliate extends Zend_Db_Table_Abstract
             )
     );
     
-	protected $_dependentTables = array('Application_Model_DbTable_ArticoliSpecifici');
+    protected $_dependentTables = array('Application_Model_DbTable_ArticoliSpecifici');
 }

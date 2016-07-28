@@ -100,20 +100,23 @@ class Frontend_Model_Catalogo {
     {
         $categoriesNavigationBranch = array();
         
-        foreach($this->_categoriesList[$rootCategory] as $categoryId => $category)
+        if(count($this->_categoriesList) && count($this->_categoriesList[$rootCategory]))
         {
-            if($category['Attivo'])
-            {
-                $categoryEntry = $this->makeNavigationPage($category, $rel_path);
-
-                if(isset($this->_categoriesList[$categoryId]))
-                {
-                    $categoryEntry['class'] .= ' padre';
-                    $categoryEntry['pages'] = $this->buildNavigationBranch($categoryId, $categoryEntry['uri']."/");
-                }
-
-                $categoriesNavigationBranch[] = $categoryEntry;
-            }
+	        foreach($this->_categoriesList[$rootCategory] as $categoryId => $category)
+	        {
+	            if($category['Attivo'])
+	            {
+	                $categoryEntry = $this->makeNavigationPage($category, $rel_path);
+	
+	                if(isset($this->_categoriesList[$categoryId]))
+	                {
+	                    $categoryEntry['class'] .= ' padre';
+	                    $categoryEntry['pages'] = $this->buildNavigationBranch($categoryId, $categoryEntry['uri']."/");
+	                }
+	
+	                $categoriesNavigationBranch[] = $categoryEntry;
+	            }
+	        }
         }
         
         return $categoriesNavigationBranch;
@@ -148,7 +151,7 @@ class Frontend_Model_Catalogo {
         else
         {
             $containerClass = get_class($container);
-
+            
             if($containerClass == "Application_Model_DbTable_Categorie")
             {
             }

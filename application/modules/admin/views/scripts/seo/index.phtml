@@ -6,16 +6,26 @@
     {
 ?>
     <div id='pannelloSeo' class="main">
+    	<form method="post" action="<?php echo $this->url(array('module' => 'admin', 'controller' => 'SEO', 'action' => 'confirm')); ?>" id="formSEO">          
         <div id='pannelloSeo-titoloBase'>
             <div id='pannelloSeo-titoloBase-text'>
                  Titolo di base delle pagine:
             </div>
-            <div id='pannelloSeo-titoloBase-form'>
-                <form method="post" action="<?php echo $this->url(array('module' => 'admin', 'controller' => 'SEO', 'action' => 'changeTitle')); ?>" id="formSEO">
-                    <input type="text" class="ui-widget-content ui-corner-all" name="titoloBase" size="30" value="<?php echo $this->TitoloBase; ?>"/>
-                </form>
+            <div id='pannelloSeo-titoloBase-input'>
+            	<input type="text" class="ui-widget-content ui-corner-all" name="titoloBase" size="30" value="<?php echo $this->TitoloBase; ?>"/>
             </div>
+            <?php
+            	if($this->configAdmin->plugins->addthis)
+            	{
+            ?>
+	            <div id='pannelloSeo-addThis-input'>
+	                <input type="checkbox" class="ui-widget-content ui-corner-all" name="addthis" id="addthis" <?php if($this->AddThis == 1) echo "checked='checked'"; ?>/><label for='addthis'>Condivisione contenuti AddThis attiva</label>
+	            </div>
+            <?php
+            	}
+            ?>
         </div>
+        </form>
         <div id="pannelloSeo-aggiornaSitemap">
             <div id="pannelloSeo-aggiornaSitemap-text">
                 Aggiorna la Sitemap sui motori di ricerca:

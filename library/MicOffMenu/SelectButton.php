@@ -14,6 +14,8 @@ class MicOffMenu_SelectButton extends MicOffMenu_AbstractButton {
             $this->_label = 'Seleziona '.$property;
         else
             $this->_label = $label;
+        	
+        $this->_options = array();
 
         $this->_action = $action;
     }
@@ -87,7 +89,7 @@ class MicOffMenu_SelectButton extends MicOffMenu_AbstractButton {
                 $.post(updateUrl,{ajax: true},function(data){visible = $('.Select".$this->_property."').is(':visible'); $('.Select".$this->_property."').replaceWith(data); if(!visible) $('.Select".$this->_property."').hide();});
             }
 
-            ";
+        ";
         
         if($this->_defaultValue !== null)
             $this->_javascript .= "

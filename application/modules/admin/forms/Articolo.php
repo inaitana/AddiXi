@@ -25,10 +25,13 @@ class Admin_Form_Articolo extends Zend_Form
                 $imgLabel = "Cambia immagine:";
             else
                 $imgLabel = "Carica un'immagine:";
+
+            $this->addElement('hidden','idImmagine');
+            $this->addElement('hidden','pathImmagine');
             
             $this->addElement('file','immagine', array(
                 'label' => $imgLabel,
-                'destination' => realpath(APPLICATION_PATH.'/../public/immagini'),
+                'destination' => realpath(APPLICATION_PATH.'/../public'.$this->_config->paths->images),
                 'validators' => array(
                     array('Count',false,1),
                     array('Size', false, 1048576),
@@ -39,16 +42,17 @@ class Admin_Form_Articolo extends Zend_Form
             );
 
             $this->addElement('hidden','idCategoria');
-            $this->addElement('hidden','idImmagine');
             
             if($this->_mode == 'edit')
                 $this->addElement('select', 'idNuovaCategoria', array(
                     'label'      => 'Cambia categoria:',
+                	'class'		 => 'ui-state-default ui-widget ui-corner-all',
                 ));
 
             $this->addElement('select', 'idMarca', array(
                 'required'   => true,
                 'label'      => $this->_config->language->brandNameSing.":",
+                'class'		 => 'ui-state-default ui-widget ui-corner-all',
             ));
 
             $this->addElement('text', 'NuovaMarca', array(
@@ -90,7 +94,7 @@ class Admin_Form_Articolo extends Zend_Form
                 'class'      => 'ui-widget-content ui-corner-all'
             ));
 
-            if($this->_configAdmin->articles->edit->ckeditor)
+            if($this->_configAdmin->plugins->ckeditor)
                 $class = 'ckeditor';
             else
                 $class = '';
@@ -176,7 +180,7 @@ class Admin_Form_Articolo extends Zend_Form
             'ignore' => true
         ));
 
-        $this->addDisplayGroup(array('idCategoria', 'conferma', 'id', 'csrf'), 'hidden',array('class' => 'hidden'));
+        $this->addDisplayGroup(array('idCategoria', 'idImmagine', 'pathImmagine', 'conferma', 'id', 'csrf'), 'hidden',array('class' => 'hidden'));
     }
 }
 

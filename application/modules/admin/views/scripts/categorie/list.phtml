@@ -7,7 +7,7 @@ if(isset($this->categoria))
         <a href="<?php echo $this->url(array('controller' => 'categorie', 'action' => 'list'));?>" id="esploraCategoria<?php echo $this->categoria['idCategoriaPadre'];?>" class="esploraCategoria">Torna Su</a>
     </div>
     <div id="categorie-lista-titolo" class="lista-titolo">
-        Lista sottocategorie di: <?php echo $this->categoria['Nome']; ?>
+        Lista Sottocategorie di: <?php echo $this->categoria['Nome']; ?>
     </div>
     <?php
     if(count($this->sottoCategorie))
@@ -32,7 +32,7 @@ else
 ?>
 <div id="categorie-lista" class="lista page ui-widget-content ui-corner-all">
     <div id="categorie-lista-titolo" class="lista-titolo">
-        Lista categorie
+        Lista Categorie
     </div>
     <table id="categorie-lista-tabella" class="lista-tabella">
 <?php

@@ -1,9 +1,7 @@
 <?php
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
-{
-    protected $_shopName = 'AddiXi';
-    
+{    
     protected function _initModuleControllers()
     {
         $frontController = Zend_Controller_Front::getInstance();
@@ -30,12 +28,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initConfig()
     {
-        $shopPath = str_replace(" ","",strtolower($this->_shopName));
+    	include(realpath(APPLICATION_PATH.'/configs/shopname.inc.php'));
+    	
+        $shopPath = str_replace(" ","",strtolower($config->shopName));
         $dbconfig = new Zend_Config_Ini(APPLICATION_PATH.'/configs/'.$shopPath.'/config.ini','db');
         $this->setOptions($dbconfig->toArray());
 
         $config = new Zend_Config_Ini(APPLICATION_PATH.'/configs/'.$shopPath.'/config.ini',$shopPath, array('allowModifications' => true));
-        $config->shopName = $this->_shopName;
         $config->shopPath = $shopPath;
         $config->setReadOnly();
         Zend_Registry::set('config',$config);
@@ -95,9 +94,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->bootstrap('view');
         $view = $this->getResource('view');
         $view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
-        $view->jQuery()->setVersion('1.4.3');
-        $view->jQuery()->setUiVersion('1.8.6');
-        $view->jQuery()->addJavascriptFile('/js/jquery.address-1.2.2.min.js');
+        $view->jQuery()->setVersion('1.6.2');
+        $view->jQuery()->setUiVersion('1.8.16');
+        $view->jQuery()->addJavascriptFile('/js/jquery.address-1.4.min.js');
         $view->jQuery()->addJavascriptFile('/js/jquery.uploadify.v2.1.0.min.js');
         $view->jQuery()->addJavascriptFile('/js/jquery.xTooltip.js');
         $view->jQuery()->addStylesheet('/css/jqueryui/'.$config->jqueryui->style.'/jquery-ui-1.8.5.custom.css');

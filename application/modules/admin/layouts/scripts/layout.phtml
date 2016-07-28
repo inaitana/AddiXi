@@ -1,7 +1,7 @@
-<?php
+<?php 
     $menu = $this->tabMenu();
     
-    if (Zend_Registry::get('configAdmin')->images->kcfinder)
+    if (Zend_Registry::get('configAdmin')->plugins->kcfinder)
         $this->KCFinder();
     
     echo $this->doctype();
@@ -25,5 +25,8 @@
         <div id="footer">
             <?php echo $this->userStatus();?> AddiXi <?php echo Zend_Registry::get('config')->version; ?> © 2010<?php if(date('Y')!=2010) echo "-".date('Y');?>
         </div>
+        <?php 
+            if(Zend_Registry::get('config')->SMTP->server == "")
+            	echo $this->DisplayMail(); ?>
     </body>
 </html>

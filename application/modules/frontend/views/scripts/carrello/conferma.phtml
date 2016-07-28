@@ -8,10 +8,6 @@ if($this->success)
 </h4>
 <?php
 }
-else if(false)
-{
-	echo "Spiacente, il servizio è in manutenzione, la invitiamo a riprovare tra qualche minuto.";
-}
 else
 {
 ?>
@@ -29,7 +25,7 @@ else
     $(function(){
         function NewAddress()
         {
-            if($('#NewAddress').attr('checked'))
+            if($('#NewAddress').is(':checked'))
             {
                 $('#fieldset-dati :input').not('#NewAddress').attr('readonly',false);
                 $('#fieldset-dati label').not('.optional').addClass('required');

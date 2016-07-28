@@ -9,7 +9,7 @@ class MicOffMenu_ButtonsGroup {
     function __construct($name, $label = null)
     {
         $this->_name = $name;
-        if($this->_label == null)
+        if($label == null)
             $this->_label = $name;
         else
             $this->_label = $label;
@@ -27,12 +27,47 @@ class MicOffMenu_ButtonsGroup {
 
     function newSelectButton($property, $label = null, $action = 'List')
     {
-        return $this->_buttonsArray[$property]->newSelectButton($property, $label, $action);
+        $selectButton = new MicOffMenu_SelectButton($property, $label, $action);
+        $this->_buttonsArray["select".$property] = $selectButton;
+        return $selectButton;
+    }
+
+    function newRadioButton($property, $label = null, $forActions = null)
+    {
+        $radioButton =  new MicOffMenu_RadioButton($property, $label, $forActions);
+        $this->_buttonsArray["radio".$property] = $radioButton;
+        return $radioButton;
+    }
+
+    function newCheckboxButton($property, $label = null, $forActions = null, $defaultOn = false)
+    {
+        $checkboxButton =  new MicOffMenu_CheckboxButton($property, $label, $forActions, $defaultOn);
+        $this->_buttonsArray["checkbox".$property] = $checkboxButton;
+        return $checkboxButton;
+    }
+
+    function newComboboxButton($property, $label = null, $showAllLabel = null, $forActions = null)
+    {
+        $comboboxButton =  new MicOffMenu_ComboboxButton($property, $label, $showAllLabel, $forActions);
+        $this->_buttonsArray["combobox".$property] = $comboboxButton;
+        return $comboboxButton;
+    }
+
+    function newDatepickerButton($property, $label = null, $interval = false, $showAllLabel = null, $forActions = null)
+    {
+        $datepickerButton =  new MicOffMenu_DatepickerButton($property, $label, $interval, $showAllLabel, $forActions);
+        $this->_buttonsArray["datepicker".$property] = $datepickerButton;
+        return $datepickerButton;
     }
 
     function addButton(MicOffMenu_AbstractButton $button)
     {
         $this->_buttonsArray[$button->getName()] = $button;
+    }
+
+    function addSeparator()
+    {
+        $this->_buttonsArray[] = "<li></li>";
     }
 
     function getName()

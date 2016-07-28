@@ -125,16 +125,7 @@ class User_Form_Registrazione extends Zend_Form
         ));
         
         $this->addDisplayGroup(array('Nome', 'Cognome', 'Indirizzo','CAP','Città','Provincia'), 'dati',array('legend' => 'Dati Cliente'));
-		
-        $this->addElement('checkbox','Condizioni',array(
-	        'label' => "Dichiaro di accettare le <a href='/condizioni-di-vendita.html'>condizioni di vendita</a> e l'<a href='/privacy.html'>informativa sulla privacy</a>",
-	        'ignore' => true,
-			'decorators' => array(
-					array('ViewHelper'),
-					array('Label', array('placement' => 'APPEND', 'escape' => false))
-	       	)
-		));
-		
+
         $this->addElement('captcha','captcha',array(
             'label' => 'Controllo di sicurezza',
             'captcha' => 'ReCaptcha',

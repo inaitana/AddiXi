@@ -73,20 +73,6 @@
             </td>
         </tr>
     </table>
-    <table id="cliente-utente-dialog-tabella" class="dialog-tabella">
-        <tr>
-            <th>Nome Utente:</th>
-            <td id="cliente-utente-dialog-nomeUtente" class="dialog-nomeUtente">
-                <?php echo $this->cliente->{'Nome Utente'}; ?>
-            </td>
-        </tr>
-        <tr>
-            <th>Data Registrazione:</th>
-            <td id="cliente-utente-dialog-data" class="dialog-data">
-                <?php echo $this->cliente->{'Data Registrazione'}; ?>
-            </td>
-        </tr>
-    </table>
 <?php
     if(!$this->cliente->Principale)
     {
@@ -168,7 +154,21 @@
             </td>
         </tr>
     </table>
-</div>
 <?php
     }
 ?>
+    <table id="cliente-utente-dialog-tabella" class="dialog-tabella">
+        <tr>
+            <th>Nome Utente:</th>
+            <td id="cliente-utente-dialog-nomeUtente" class="dialog-nomeUtente">
+                <?php echo $this->cliente->{'Nome Utente'}; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Data Registrazione:</th>
+            <td id="cliente-utente-dialog-data" class="dialog-data">
+                <?php echo $this->cliente->{'Data Registrazione'}; ?>
+            </td>
+        </tr>
+    </table>
+</div>

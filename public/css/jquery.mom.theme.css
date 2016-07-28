@@ -57,7 +57,7 @@ ul.mom .orb .orb-menu .orb-left > ul > li
 /* Stile dei pulsanti della parte sinistra dell'orb menu on hover (niente gradiente css, ad IE non piace)*/
 ul.mom .orb .orb-menu .orb-left > ul > li:hover
 {
-    border: 1px solid #FFB700;
+    border: 1px solid #CFDBEB;
     background-image: url('/css/images/mom/gradientePulsanti.png');
 }
 
@@ -136,9 +136,23 @@ ul.mom .menu .submenu > li > div
 ul.mom .menu .submenu > li > div:hover
 {
     padding: 4px;
-    
-    border: 1px solid #FFBB00;
+    border: 1px solid #CFDBEB;
     background-image: url('/css/images/mom/gradientePulsanti.png');
+}
+
+/* Stile dei pulsanti input onhover */
+ul.mom .menu .submenu > li > div.momInput:hover
+{
+    padding: 5px;	
+	border: none;
+	background-image: none;
+}
+
+/* Stile delle etichette dei pulsanti input*/
+ul.mom .menu .submenu > li > div.momInput > div.momInputLabel
+{
+	font-size: 12px;	
+	padding-bottom: 2px;
 }
 
 /* Stile delle etichette dei pulsanti */
@@ -193,10 +207,10 @@ ul.mom .momSelect > ul {
 
 /* Stile dei separatori delle select */
 ul.mom .momSelect > ul > li {
-    line-height: 1.7em;
-    padding: 0px 12px;
+    line-height: 1.3em;
+    padding: 3px 12px;
 
-    font-size: 11px;
+    font-size: 12px;
     border-bottom: 1px dashed white;
 }
 
@@ -218,3 +232,10 @@ ul.mom .momSelect ul a:hover {
     -webkit-box-shadow: 4px 5px 4px #818181; /* Safari, Chrome */
     box-shadow: 4px 5px 4px #818181; /* CSS3 */
 }
+
+/* Dimensione dei font dei widget jquery */
+ul.mom .ui-widget
+{
+	font-size: 1em;
+}
+

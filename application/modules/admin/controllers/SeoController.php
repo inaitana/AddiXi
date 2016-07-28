@@ -24,12 +24,14 @@ class Admin_SEOController extends Zend_Controller_Action
         $this->_auth = Zend_Registry::get('Admin_Auth');
         
         $this->view->headTitle('Pannello SEO | ');
+        $this->view->configAdmin = Zend_Registry::get('configAdmin');
     }
 
     public function indexAction()
     {
         $this->view->TitoloBase = $this->_settingsModel->get('Titolo Base');
         $this->view->MotoriDiRicerca = $this->_SEOModel->getSearchEngines();
+        $this->view->AddThis = $this->_settingsModel->get('AddThis');
     }
 
     public function pingAction()
@@ -40,9 +42,13 @@ class Admin_SEOController extends Zend_Controller_Action
         echo $newDate;
     }
 
-    public function changetitleAction()
+    public function confirmAction()
     {
         $this->_settingsModel->set('Titolo Base', $this->_request->getParam('titoloBase'));
+        if($this->_request->getParam('addthis') == 'on')
+        	$this->_settingsModel->set('AddThis', 1);
+        else
+        	$this->_settingsModel->set('AddThis', 0);
         $this->getHelper('viewRenderer')->setNoRender();
         echo "0";
     }

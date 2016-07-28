@@ -17,7 +17,8 @@ class Admin_ImmaginiController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $this->_helper->redirector('index','index');
+        if(!$this->_request->getParam('sync'))
+            $this->_helper->redirector('index','index');
     }
 
     public function infoAction()
@@ -30,6 +31,13 @@ class Admin_ImmaginiController extends Zend_Controller_Action
         $infoImmagine = array('path' => $imagePath, 'width' => $size[0], 'height' => $size[1]);
 
         echo Zend_Json::encode($infoImmagine);
+    }
+    
+    public function findAction()
+    {
+    	$url = $this->_request->getParam('url');
+        if($url != null)
+        	echo $this->_imagesModel->findImageByPath(urldecode($url))->idImmagineTagliata;
     }
 }
 

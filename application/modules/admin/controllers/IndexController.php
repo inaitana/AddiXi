@@ -22,9 +22,39 @@ class Admin_IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
+    	exit;
+    	
+    	$imagesModel = new Admin_Model_Immagini();
+    	    	
+    	$dbImages = $imagesModel->getPathsFromDb();    	
+    	$fsImages = $imagesModel->getPathsFromFs();
+    	
+    	$okImages = array_intersect($dbImages, $fsImages);
+    	
+    	$fsExtra = array_diff($fsImages, $okImages);
+    	echo "<pre>";
+    	var_dump($okImages);
+    	
+    	$dbExtra = array_diff($dbImages, $okImages);
+    	
+    	foreach ($dbExtra as $dbImage)
+    		$imagesModel->deleteImage($dbImage['Path']);
+    	
+    	foreach($fsExtra as $fsImage)
+    		$imagesModel->addImage($fsImage['Path']);
+    		
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+        $imagesModel = new Admin_Model_Immagini();
+    	
         if(!$this->view->ajax)
             $this->getHelper('viewRenderer')->setNoRender();
-    }
+    }    
 
     public function infoAction()
     {

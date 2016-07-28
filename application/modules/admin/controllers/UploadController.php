@@ -17,9 +17,6 @@ class Admin_UploadController extends Zend_Controller_Action
         $this->_imagesModel = new Admin_Model_Immagini();
         $this->_config = Zend_Registry::get('config');
         $this->_path = $this->_config->paths->images;
-        
-        if(!file_exists(APPLICATION_PATH.'/../public'.$this->_path."/thumbs/"))
-            mkdir(APPLICATION_PATH.'/../public'.$this->_path."/thumbs/");
     }
 
     public function indexAction()
@@ -36,17 +33,14 @@ class Admin_UploadController extends Zend_Controller_Action
             
             move_uploaded_file($tmp,$pathImmagine);
 
-            if($thumbPath = $this->createThumbnail($pathImmagine))
-            {
-                $thumbnail_base64enc = $this->getBase64($thumbPath);
-                echo $this->_imagesModel->addImage($nomeFile, $thumbnail_base64enc);
-            }
+            if($this->createThumbnail($pathImmagine))
+                echo $this->_imagesModel->addImage($this->_path.$nomeFile);
         }
     }
 
     protected function createThumbnail($filename)
     {
-		$ext = pathinfo($filename, PATHINFO_EXTENSION);
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
         switch(strtolower($ext))
         {
             case "jpg":
@@ -71,16 +65,15 @@ class Admin_UploadController extends Zend_Controller_Action
 
         $height = imagesy($image);
         $width = imagesx($image);
-        $new_height = $this->_config->articles->thumbnail->height;
-        $new_width = $this->_config->articles->thumbnail->width;
+        $new_height = $this->_config->images->thumbnails->maxHeight;
+        $new_width = $this->_config->images->thumbnails->maxWidth;
 
-        if ((is_null($new_height) || $new_height == 'auto'))
-            $new_height = floor($new_width / $width * $height);
-
-        else if ((is_null($new_width) || $new_width == 'auto'))
+        if(($height > $width) > ($new_height > $new_width))
             $new_width = floor($width / $height * $new_height);
+        else
+            $new_height = floor($height / $width * $new_width);
 
-        $new_path = substr_replace($filename,"/thumbs/",strrpos($filename,"/"),1);
+		$new_path = str_replace("/immagini","/.thumbs/immagini",$filename);
         $new_image = imagecreatetruecolor($new_width, $new_height);
         imagecopyresampled($new_image , $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
         $saveFunction($new_image, $new_path);
@@ -89,11 +82,6 @@ class Admin_UploadController extends Zend_Controller_Action
             return false;
         else
             return $new_path;
-    }
-
-    protected function getBase64($filename)
-    {
-        return base64_encode(file_get_contents($filename));
     }
 }
 

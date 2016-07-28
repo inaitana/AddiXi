@@ -30,6 +30,7 @@ class Frontend_Model_Vendite extends Application_Model_Vendite {
         $sale['Data'] = date('Y-m-d');
         $sale['Online'] = true;
         $sale['Confermata'] = false;
+        $sale['Evasa'] = false;
         $sale['SubTotale'] = $this->_cartModel->getTotal(true);
         $sale['Costo Spedizione'] = 0;
         $sale['Totale'] = $sale['SubTotale'] + $sale['Costo Spedizione'];

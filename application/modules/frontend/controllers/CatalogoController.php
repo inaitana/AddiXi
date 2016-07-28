@@ -8,6 +8,7 @@ class CatalogoController extends Zend_Controller_Action
     protected $_catalogNavigation = null;
     protected $_activeCategoryPage = null;
     protected $_cartModel = null;
+    protected $_config = null;
 
     public function preDispatch()
     {
@@ -58,11 +59,11 @@ class CatalogoController extends Zend_Controller_Action
             $this->view->mostraDettaglioCarrello = false;
             $this->_cartModel->addCartJavascript('false');
         }
-
+		
+        $this->_config = $config;
         $this->view->layout()->config = $config;
 
         Zend_Registry::set('defaultImage',"/immagini/default300.jpg");
-        Zend_Registry::set('defaultThumb', "/immagini/thumbs/default300.jpg");
 
         $browserSession = new Zend_Session_Namespace('Browser');
         
@@ -70,6 +71,14 @@ class CatalogoController extends Zend_Controller_Action
             Zend_Registry::set('useBase64', false);
         else
             Zend_Registry::set('useBase64', true);
+            
+        $listOrder = array_combine(preg_split("/, /",$this->_config->articles->listOrder), array("immagine", "codice", "marca", "nome", "prezzo", "quantità", "altro"));
+		ksort($listOrder);
+		$this->view->layout()->listOrder = $listOrder;
+        
+		$detailOrder = array_combine(preg_split("/, /",$this->_config->articles->detailOrder), array("immagine", "codice", "marca", "nome", "descrizione", "prezzo", "quantità", "altro"));
+		ksort($detailOrder);
+		$this->view->detailOrder = $detailOrder;
     }
 
     public function indexAction()
@@ -79,11 +88,11 @@ class CatalogoController extends Zend_Controller_Action
         $category = $this->_categoryModel->getCategory('CatalogoHome');
 
         $this->view->categoria = $category;
-
+        
         $this->_catalogNavigation = $this->_catalogModel->getCategoryNavigation('CatalogoHome');
 
         $paginatorAdapter = $this->_catalogModel->getPaginatorAdapter($category,array("Marca","Nome"));
-
+		
         $paginator = new Zend_Paginator($paginatorAdapter);
  //       $paginator->setCache($this->_cache);
         $paginator->setCurrentPageNumber($this->_request->getParam('page'));
@@ -111,7 +120,7 @@ class CatalogoController extends Zend_Controller_Action
 
         $this->view->categoria = $category;
 
-        $this->_catalogNavigation = $this->_catalogModel->getCategoryNavigation($category);
+		$this->_catalogNavigation = $this->_catalogModel->getCategoryNavigation($category);
 
         $paginatorAdapter = $this->_catalogModel->getPaginatorAdapter($category,array("Marca","Nome"));
 
@@ -139,7 +148,7 @@ class CatalogoController extends Zend_Controller_Action
         $this->view->marca = $brand;
 
         $this->_catalogNavigation = $this->_catalogModel->getBrandNavigation($brand);
-
+        
         $paginatorAdapter = $this->_catalogModel->getPaginatorAdapter($brand,array("Nome"));
 
         $paginator = new Zend_Paginator($paginatorAdapter);
@@ -157,8 +166,11 @@ class CatalogoController extends Zend_Controller_Action
 
     public function articoloAction()
     {
+        $this->_settingsModel = new Application_Model_Impostazioni();
+        $this->view->AddThis = $this->_settingsModel->get('AddThis');
+        
         $this->_activeCategoryPage = $this->_catalogNavigation->findOneByUri('/catalogo/'.rtrim($this->_request->getParam('categoryPath'),'/'));
-
+        
         if($this->_activeCategoryPage==null)
             throw new Zend_Controller_Action_Exception('',404);
         
@@ -168,7 +180,7 @@ class CatalogoController extends Zend_Controller_Action
             throw new Zend_Controller_Action_Exception('',404);
         
         $this->view->articolo = $article;
-
+       	
         $this->_catalogNavigation = $this->_catalogModel->getArticleNavigation($article, true);
 /*
         $category = $this->_categoryModel->getCategory($this->_activeCategoryPage->id);

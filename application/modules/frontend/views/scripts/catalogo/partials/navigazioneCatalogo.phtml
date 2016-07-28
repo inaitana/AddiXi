@@ -16,13 +16,13 @@ function bindClicks() {
         
         if($(this).hasClass('padre'))
             $(this).parent().children('ul').show();
-
+		
         $.address.parameter('step',encodeURIComponent($(this).attr('href')));
         $('#returnTo').val($(this).attr('href'));
         
         if(!$(this).hasClass('linkArticolo') && !$(this).hasClass('paginaCategoria'))
             $.address.parameter('cat',$(this).attr('id').replace('breadcrumbs','menu'));
-
+		
         updateHash();
         
         return false;

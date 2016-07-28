@@ -26,10 +26,12 @@ class AddiXi_Cron_CronRunner {
             $modulesRootDirectory = realpath($front->getModuleDirectory()."/..");
 
             foreach (scandir($modulesRootDirectory) as $moduleDirectory)
-                if($moduleDirectory != '.' && $moduleDirectory != '..' && is_dir($modulesRootDirectory.'/'.$moduleDirectory.'/cron/'))
+            {            	
+                if(strpos($moduleDirectory,'.') !== 0 && is_dir($modulesRootDirectory.'/'.$moduleDirectory.'/cron/'))
                     foreach (scandir($modulesRootDirectory.'/'.$moduleDirectory.'/cron/') as $cronFile)
                         if ($cronFile !== '.' && $cronFile != '..')
                             include_once $modulesRootDirectory.'/'.$moduleDirectory.'/cron/'.$cronFile;
+            }
 
             foreach (get_declared_classes() as $class)
                 if (is_subclass_of($class, 'Addixi_Cron_CronJobAbstract'))

@@ -1,5 +1,5 @@
 DirectoryIndex /public_html/index.html
-SetEnv APPLICATION_ENV staging
+SetEnv APPLICATION_ENV development
 
 RewriteEngine On
 
@@ -12,12 +12,5 @@ RewriteCond %{DOCUMENT_ROOT}/public_html%{REQUEST_URI} -s [OR]
 RewriteCond %{DOCUMENT_ROOT}/public_html%{REQUEST_URI} -l [OR]
 RewriteCond %{DOCUMENT_ROOT}/public_html%{REQUEST_URI} -d
 RewriteRule ^.*$ /public_html%{REQUEST_URI} [NC,L]
-
-
-# RewriteCond %{REQUEST_URI} catalogo [OR]
-# RewriteCond %{REQUEST_URI} admin [OR]
-# RewriteCond %{REQUEST_URI} carrello
-# RewriteRule ^.*$ /public_html/index.html [NC,L]
-
 
 RewriteRule ^.*$ index.php [NC,L]

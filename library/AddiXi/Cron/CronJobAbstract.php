@@ -11,6 +11,7 @@ abstract class AddiXi_Cron_CronJobAbstract {
     protected $_defaultTryOuts = 1;
     protected $_interval;
     protected $_tryOuts;
+    protected $_firstTime = null; // 'HH:mm:ss'
 
     public function __construct($cronJobsDb = null)
     {
@@ -23,7 +24,7 @@ abstract class AddiXi_Cron_CronJobAbstract {
             $this->_tryOuts = $this->_defaultTryOuts;
         else if($this->_tryOuts > $this->_maxTryOuts)
             $this->_tryOuts = $this->_maxTryOuts;
-
+        
         $this->_cronJobsDb = $cronJobsDb;
         $this->setupDb();
     }
@@ -35,7 +36,9 @@ abstract class AddiXi_Cron_CronJobAbstract {
     protected function setupDb()
     {
         if($this->_cronJobsDb != null)
-            $this->_cronJobsDb->setupJob(get_class($this));
+        {
+            $this->_cronJobsDb->setupJob(get_class($this), $this->_firstTime);
+        }
     }
 
     protected function updateDb()

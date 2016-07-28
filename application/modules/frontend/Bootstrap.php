@@ -159,17 +159,20 @@ class Frontend_Bootstrap extends Zend_Application_Module_Bootstrap
 
     public function _loadViewHelpers()
     {
+        $config = Zend_Registry::get('config');
         $layout = Zend_Layout::getMvcInstance();
 
         $view = $layout->getView();
-        // bug jQuery UI
         $view->jQuery()->uiEnable();
         $view->registerHelper(new Frontend_View_Helper_Cart_AddToCart(), 'AddToCart');
         $view->registerHelper(new Frontend_View_Helper_Cart_PreviewCart(), 'PreviewCart');
         $view->registerHelper(new Frontend_View_Helper_Cart_ViewCart(), 'ViewCart');
         $view->registerHelper(new Frontend_View_Helper_ShowQuantity(), 'ShowQuantity');
+        $view->registerHelper(new Frontend_View_Helper_AddThis(), 'AddThis');
         $view->registerHelper(new User_View_Helper_LoginBox(), 'LoginBox');
         $view->registerHelper(new Application_View_Helper_FormAjaxify(), 'FormAjaxify');
+        if($config->SMTP->server == "")
+        	$view->registerHelper(new Application_View_Helper_DisplayMail(), 'DisplayMail');
     }
     
     protected function addStaticSitemap($nav)

@@ -40,9 +40,9 @@ class AddiXi_Cache_CacheStarterPlugin extends Zend_Controller_Plugin_Abstract
                                                                   'cache_with_session_variables' => true,
                                                                   'cache_with_post_variables' => true,
                                                                   'cache_with_get_variables' => true,
-                                                                  'make_id_with_cookie_variables' => false)),array('file_name_prefix' => 'Zend_Cache_'.$config->shopPath));
+                                                                  'make_id_with_cookie_variables' => false)),array('file_name_prefix' => 'Zend_Cache_'.$config->shopPath.'_'.APPLICATION_ENV));
 
-        $cache_core = Zend_Cache::factory('core','file',array('automatic_serialization' => true),array('file_name_prefix' => 'Zend_Cache_'.$config->shopPath));
+        $cache_core = Zend_Cache::factory('core','file',array('automatic_serialization' => true),array('file_name_prefix' => 'Zend_Cache_'.$config->shopPath.'_'.APPLICATION_ENV));
 
         Zend_Db_Table_Abstract::setDefaultMetadataCache($cache_core);
 

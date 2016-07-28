@@ -1,23 +1,47 @@
 <div id="ordini-lista" class="ordini lista page ui-widget-content ui-corner-all">
-    <?php echo $this->customerFilterBox($this->filtroCliente); ?>
     <div id="ordini-lista-titolo" class="lista-titolo">
-        Lista Ordini
+        Lista Ordini 
+    <?php if($this->cliente != null)
+    {
+    ?>
+    	per il cliente: 
+        <a href="<?php echo $this->url(array('controller' => 'clienti', 'action' => 'dettagli'));?>" id="Cliente<?php echo $this->filtroCliente?>" class="dettagliCliente">
+    		<?php echo $this->cliente->Nome." ".$this->cliente->Cognome;?>
+    	</a>
+    <?php 
+    }
+    ?>
     </div>
-    <table id="ordini-lista-tabella" class="lista-tabella">
-        <tr>
-            <th>Numero:</th>
-            <th>Data:</th>
-            <th>Cliente:</th>
-            <th>SubTotale:</th>
-            <th>Spedizione:</th>
-            <th>Totale:</th>
-            <th>Stato:</th>
-            <th>&nbsp;</th>
-        </tr>
-        <?php
-            echo $this->partialLoop('/ordini/partials/venditaList.phtml', $this->vendite);
-        ?>
-    </table>
+    <?php 
+    if(count($this->vendite))
+    {
+    ?>
+	    <table id="ordini-lista-tabella" class="lista-tabella">
+	        <tr>
+	            <th>Numero:</th>
+	            <th>Data:</th>
+	            <th>Cliente:</th>
+	            <th>SubTotale:</th>
+	            <th>Spedizione:</th>
+	            <th>Totale:</th>
+	            <th>Stato:</th>
+	            <th>&nbsp;</th>
+	        </tr>
+	        <?php
+	            echo $this->partialLoop('/ordini/partials/venditaList.phtml', $this->vendite);
+	        ?>
+	    </table>
+    <?php     
+    }
+    else
+    {
+    ?>
+	    <div id="ordini-lista-vuota" class="lista-vuota">
+	        Nessun ordine per il cliente selezionato.
+	    </div>    	
+    <?php 
+    }
+    ?>
 </div>
 <script type="text/javascript">
     $('.dettagliOrdine').button().click(

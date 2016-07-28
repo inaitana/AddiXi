@@ -70,6 +70,11 @@ class Admin_ArticoliController extends Zend_Controller_Action
                 $form->removeElement('immagine');
             
             if($form->isValid($request)) {
+                if($form->getValue('idImmagine') == '' && $form->getValue('pathImmagine') != '')
+                {
+                    $imagesModel = new Admin_Model_Immagini();
+                    $form->setValue('idImmagine', $imagesModel->findImageByPath($form->getValue('pathImmagine')));
+                }
                 $this->_articlesModel->addArticle($form->getValues());
                 $this->_helper->cacheCleaner();
 
@@ -120,6 +125,11 @@ class Admin_ArticoliController extends Zend_Controller_Action
                 $form->removeElement('immagine');
             
             if($form->isValid($request)) {
+                if($form->getValue('idImmagine') == '' && $form->getValue('pathImmagine') != '')
+                {
+                    $imagesModel = new Admin_Model_Immagini();
+                    $form->setValue('idImmagine', $imagesModel->findImageByPath($form->getValue('pathImmagine')));
+                }
                 $this->_articlesModel->editArticle($form->getValues());
                 $this->_helper->cacheCleaner();
 

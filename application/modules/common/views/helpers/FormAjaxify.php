@@ -2,13 +2,15 @@
 class Application_View_Helper_FormAjaxify extends Zend_View_Helper_Abstract
 {
     protected $_view;
+    protected $_configAdmin;
 
     public function setView(Zend_View_Interface $view)
     {
         $this->_view = $view;
+        $this->_configAdmin = Zend_Registry::get('configAdmin');
     }
 
-    public function formAjaxify($formName, $returnAttribute = null, $popupName = null, $updateAfter = null, $updateUrl = null, $noAction = false, $uploadify = true)
+    public function formAjaxify($formName, $returnAttribute = null, $popupName = null, $updateAfter = null, $updateUrl = null, $noAction = false)
     {
         $output = "
             <script type='text/javascript'>
@@ -94,8 +96,36 @@ class Application_View_Helper_FormAjaxify extends Zend_View_Helper_Abstract
                     return false;
                 });
             </script>";
-
-        if($uploadify)
+        
+		if ($this->_configAdmin->plugins->kcfinder)
+		{
+            $output .= "
+                <script type='text/javascript'>
+                    fileElement = $('#".$formName." input[type=file][name*=immagine]');
+                    fileElement.before('<button id=selectImage>Seleziona</button>');
+            ";
+            
+            if (!$this->_configAdmin->plugins->uploadify)
+	        	$output .= "fileElement.remove();";
+	       	
+	        $output .= "
+                    $('#selectImage').button().click(function() {
+                        window.KCFinderURL = $('#pathImmagine');
+                        $('#pathImmagine').bind('change',function() {
+                                    url = $('#pathImmagine').val();
+                                    imgName = url.substring(url.lastIndexOf('/') + 1,url.lastIndexOf('.'));
+                                    $('#form-immagine').attr('src',url);
+                                    $('#form-immagine').attr('title',imgName);
+                                    $('#form-immagine').show();
+                                //    $('#form-immagine').css('width',$(imagePreview).attr('width')).css('height',$(imagePreview).attr('height'));
+                        });
+                        openimmagini();
+                        return false;
+                    });
+                </script>
+            ";
+		}
+		if ($this->_configAdmin->plugins->uploadify)
             $output .= $this->_view->uploadify($formName, true, "
                                             $('#idImmagine').val(idImmagine);
                                             $('#form-immagine').attr('src',fileObj['filePath']);
@@ -103,7 +133,7 @@ class Application_View_Helper_FormAjaxify extends Zend_View_Helper_Abstract
                                             $('#form-immagine').attr('title',fileObj['name']);
                                             $('#form-immagine').show();
                                         ");
-        
+
         return $output;
     }
 }

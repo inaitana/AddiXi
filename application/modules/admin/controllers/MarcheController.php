@@ -31,14 +31,14 @@ class Admin_MarcheController extends Zend_Controller_Action
 
     public function listAction()
     {
-        $this->view->title = "Lista Marche";
+        $this->view->title = "Lista ".$this->view->config->language->brandNamePlur;
         $this->view->headTitle($this->view->title);
         $this->view->marche = $this->_brandsModel->getBrandsList();
     }
 
     public function addAction()
     {
-        $this->view->title = "Aggiungi una nuova marca";
+        $this->view->title = "Aggiungi ".$this->view->config->language->brandNameSing;
         $this->view->headTitle($this->view->title);
 
         $form = new Admin_Form_Marca('add');
@@ -67,7 +67,7 @@ class Admin_MarcheController extends Zend_Controller_Action
         $brandId = $this->_request->getParam('marca');
         $brand = $this->_brandsModel->getBrand($brandId);
 
-        $this->view->title = "Edita una marca";
+        $this->view->title = "Edita".$this->view->config->language->brandNameSing;
         $this->view->headTitle($this->view->title);
         
         $this->view->marca = $brand->toArray();
@@ -105,7 +105,7 @@ class Admin_MarcheController extends Zend_Controller_Action
         
         $this->view->marca = $brand->toArray();
 
-        $this->view->title = "Cancella una marca";
+        $this->view->title = "Cancella ".$this->view->config->language->brandNameSing;
         $this->view->headTitle($this->view->title);
 
         $form = new Admin_Form_Marca('delete',$brandId);

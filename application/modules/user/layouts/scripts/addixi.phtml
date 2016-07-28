@@ -84,5 +84,9 @@
     <!-- wrap ends here -->
     </div>
     <div id="footer-bg"></div>
+    <?php 
+	    if(Zend_Registry::get('config')->SMTP->server == "")
+	    	echo $this->DisplayMail(); 
+    ?>
     </body>
 </html>

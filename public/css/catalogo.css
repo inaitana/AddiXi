@@ -145,9 +145,8 @@
 }
 
 #testata #breadcrumb {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-family: Tahoma, "Trebuchet MS", Arial, Helvetica, sans-serif;
     font-size: 14px;
-    font-weight: bold;
     float: left;
     width: 568px;
     padding-top: 10px;
@@ -171,7 +170,7 @@
     width: 345px;
 }
 
-#testata #carrello #imgApriCarrello{
+#testata #carrello #imgApriCarrello {
     border: 0;
     width: 20px;
     float: right;
@@ -254,12 +253,6 @@ a.catalogo, a.catalogo:visited {
     font-style: italic;
 }
 
-#articoli p
-{
-    padding: 10px;
-    margin: 0;
-}
-
 /******************************
  *  Lista Articoli Categoria  *
  ******************************/
@@ -283,8 +276,7 @@ a.catalogo, a.catalogo:visited {
 }
 
 #articoli .articoloLista .datiArticoloLista {
-    float:left;
-    padding-left:10px;
+    padding-left:110px;
 }
 
 /* Non c'è sempre, dipende dal config */
@@ -296,7 +288,7 @@ a.catalogo, a.catalogo:visited {
     color: #0000BB;
 }
 
-#articoli .articoloLista .articoloOfferta .prezzoArticoloLista {
+#articoli .articoloLista.articoloOfferta .prezzoArticoloLista {
     color: blue;
 }
 
@@ -315,7 +307,6 @@ a.catalogo, a.catalogo:visited {
 
 #articoli .articolo .immagineArticolo {
     width:100px;
-    float:left;
 }
 
 #articoli .articolo .immagineArticolo .imgArticolo {
@@ -323,27 +314,23 @@ a.catalogo, a.catalogo:visited {
 }
 
 #articoli .articolo .datiArticolo {
-    float:left;
-    padding-left:10px;
 }
 
-#articoli .articolo .datiArticolo .marcaArticolo {
+#articoli .articolo .marcaArticolo {
 	font-weight: normal;
     font-size: 100%;
-    padding: 0;
 }
 
-#articoli .articolo .datiArticolo .nomeArticolo {
+#articoli .articolo .nomeArticolo {
 	font-weight: bold;
     font-size: 100%;
-    padding: 0;
 }
 
-#articoli .articolo .datiArticolo .prezzoArticolo {
+#articoli .articolo .prezzoArticolo {
 	font-weight: bold;
 }
 
-#articoli .articolo .datiArticolo .quantitàArticolo {
+#articoli .articolo .quantitàArticolo {
 	font-weight: bold;
 }
 
@@ -408,4 +395,38 @@ a.catalogo, a.catalogo:visited {
 
 #chiusura {
     clear: both;
+}
+
+
+/*********************
+ *   Dialog          *
+ *********************/
+
+#displayMail
+{	
+	text-align: left;	
+}
+
+#displayMail p
+{	
+	margin: 15px 0px;
+}
+
+#displayMail ul
+{	
+	padding: 15px 0px 15px 40px;
+	list-style: disc;
+}
+
+#displayMail #displayMail-disclaimer
+{
+	margin: 10px 0px;
+}
+
+#displayMail .displayMail-mail
+{
+	background: none repeat scroll 0 0 #EEEEEE;
+    border: 1px solid black;
+    margin: 10px 5px;
+    padding: 0px 10px;
 }

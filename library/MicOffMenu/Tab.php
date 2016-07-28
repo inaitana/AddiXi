@@ -46,6 +46,26 @@ class MicOffMenu_Tab {
         return $this->_buttonsGroupsArray[$groupName]->newSelectButton($property, $label, $action);
     }
 
+    function newRadioButton($groupName, $property, $label = null, $forActions = null)
+    {
+        return $this->_buttonsGroupsArray[$groupName]->newRadioButton($property, $label, $forActions);
+    }
+
+    function newCheckboxButton($groupName, $property, $label = null, $forActions = null, $defaultOn = false)
+    {
+        return $this->_buttonsGroupsArray[$groupName]->newCheckboxButton($property, $label, $forActions, $defaultOn);
+    }
+
+    function newComboboxButton($groupName, $property, $label = null, $showAllLabel = null, $forActions = null)
+    {
+        return $this->_buttonsGroupsArray[$groupName]->newComboboxButton($property, $label, $showAllLabel, $forActions);
+    }
+
+    function newDatepickerButton($groupName, $property, $label = null, $interval = false, $showAllLabel = null, $forActions = null)
+    {
+        return $this->_buttonsGroupsArray[$groupName]->newDatepickerButton($property, $label, $interval, $showAllLabel, $forActions);
+    }
+
     function getName()
     {
         return $this->_name;

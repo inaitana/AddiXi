@@ -1,6 +1,20 @@
 <div id="categorie-aggiungi" class="categorie aggiungi page ui-widget-content ui-corner-all">
     <div id="categorie-aggiungi-titolo" class="aggiungi-titolo">
-        Aggiungi Categoria
+    <?php
+    	if(isset($this->categoriaPadre))
+    	{
+    ?>
+    		Aggiungi Sottocategoria di:
+    <?php
+    	echo $this->categoriaPadre->getNome();
+    	}
+    	else
+    	{ 
+    ?>
+        	Aggiungi Categoria
+    <?php
+    	} 
+    ?>
     </div>
     <div id="categorie-aggiungi-form" class="aggiungi-form">
         <?php

@@ -137,6 +137,11 @@ ul.mom .menu .submenu > li > div
     cursor: pointer;
 }
 
+ul.mom .menu .submenu > li > div.momInput
+{
+    cursor: default;
+}
+
 ul.mom .menu .submenu > li > div > a > img
 {
     display: block;
@@ -147,8 +152,20 @@ ul.mom .momSelect > ul{
     position: absolute;
     z-index: 2;
     overflow: auto;
+	display: none;
 }
 
 ul.mom .momSelect ul li {
     text-align: left;
+}
+
+.ui-autocomplete-input {
+	margin: 0px -1px 0px 0px;
+	padding: 0.45em 0 0.5em 0.45em;
+}
+
+.momInputFields input, .momInputFields button {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
 }

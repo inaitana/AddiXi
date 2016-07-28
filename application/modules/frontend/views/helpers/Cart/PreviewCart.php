@@ -42,7 +42,7 @@ class Frontend_View_Helper_Cart_PreviewCart extends Zend_View_Helper_Abstract
 
         $content = "
              <a id='linkApriCarrello' href='".htmlentities($this->UrlToggleCart($this->_view->serverUrl(true)))."'>
-	<img src='/css/images/cart.png' title='carrello' alt='carrello' /><span id='carrelloArticoli'>
+             <img src='/css/images/cart.png' title='carrello' alt='carrello' /><span id='carrelloArticoli'>
             (".$this->_carrello->Count().") ";
         $content .= new Zend_Currency(array('value' => $this->_carrello->getTotal(true)));
         $content .= "
@@ -54,6 +54,6 @@ class Frontend_View_Helper_Cart_PreviewCart extends Zend_View_Helper_Abstract
                 $content .= $this->_view->viewCart();
 
         return $content;
-    }
+    }	
 }
 ?>

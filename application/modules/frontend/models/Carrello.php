@@ -161,7 +161,7 @@ class Frontend_Model_Carrello {
                     status = !carrelloAperto;
 
                 if(status)
-                    $.post('".$view->url(array('module' => 'frontend', 'controller' => 'carrello', 'action' => 'show'),'default')."',{ajax: true}, function(data){ if($('.dettaglioCarrello').length == 0) { $('#carrelloArticoli').after(data); setCarrelloAperto(true); cambiaImmagine(true); $('.dettaglioCarrello input[type=submit]').button(); $('.dettaglioCarrello').hide().slideDown(300); } });
+                    $.post('".$view->url(array('module' => 'frontend', 'controller' => 'carrello', 'action' => 'show'),'default')."',{ajax: true}, function(data){ if($('.dettaglioCarrello').length == 0) { $('#linkApriCarrello').after(data); setCarrelloAperto(true); cambiaImmagine(true); $('.dettaglioCarrello input[type=submit]').button(); $('.dettaglioCarrello').hide().slideDown(300); } });
                 else
                 {
                     $('.dettaglioCarrello').slideUp(200,function(){ $('#dettaglioCarrello').remove()});

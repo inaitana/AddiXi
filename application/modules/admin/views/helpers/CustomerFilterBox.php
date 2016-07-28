@@ -14,11 +14,6 @@ class Admin_View_Helper_CustomerFilterBox extends Zend_View_Helper_Abstract
         $customersArray = $customersDb->getNamesArray();
         
         $output = "
-            <style type='text/css'>
-                .ui-button { margin-left: -1px; }
-                .ui-button-icon-only .ui-button-text { padding: 0.35em; }
-                .ui-autocomplete-input { margin: 0; padding: 0.48em 0 0.47em 0.45em; }
-            </style>
             <script type='text/javascript'>
             (function( $ ) {
                 $.widget( 'ui.combobox', {
@@ -52,7 +47,6 @@ class Admin_View_Helper_CustomerFilterBox extends Zend_View_Helper_Abstract
                                 },
                                 select: function( event, ui ) {
                                     ui.item.option.selected = true;
-                                    //select.val( ui.item.option.value );
                                     self._trigger( 'selected', event, {
                                         item: ui.item.option
                                     });
@@ -122,9 +116,10 @@ class Admin_View_Helper_CustomerFilterBox extends Zend_View_Helper_Abstract
                 $output .= "
                 
                 $('#selectCliente').combobox();
-                $('#toggle').click(function() {
-                    $('#combobox').toggle();
-                });
+                
+                if($.address.parameter('FiltroCliente') == null || $.address.parameter('FiltroCliente') == '')
+                	$('#showAll').hide();
+                	
                 $('#showAll').click(function() {
                     $.address.parameter('FiltroCliente','');
                     updateHash();
@@ -136,7 +131,7 @@ class Admin_View_Helper_CustomerFilterBox extends Zend_View_Helper_Abstract
             <div class='ordini-filtro-cliente'>
             	<label for='selectCliente'>Filtra per Cliente: </label>
                 <select id='selectCliente' name='selectCliente'>
-                <option value=''>Seleziona un cliente...</option>";
+                <option value=''>&nbsp;</option>";
 
         foreach($customersArray as $id => $customer)
             $output .= "<option value='".$id."'>".$customer."</option>";

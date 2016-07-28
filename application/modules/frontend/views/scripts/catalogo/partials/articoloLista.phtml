@@ -16,48 +16,77 @@
             $class .= " articoloOfferta";
         
         if(!is_file(realpath(APPLICATION_PATH ."/../public/".$this->{'Path Immagine'})))
-        {
             $this->{'Path Immagine'} = Zend_Registry::get('defaultImage');
-            $this->{'Thumbnail Path'} = Zend_Registry::get('defaultThumb');
-        }
 ?>
         <div id="articolo<?php echo $this->idArticoloSpecifico;?>" class="articoloLista <?php echo $class;?>">
-            <div id="immagineArticolo<?php echo $this->idArticoloSpecifico;?>" class="immagineArticoloLista <?php echo $class;?>">
-                <a rel="immagine<?php echo $this->idArticoloSpecifico;?>" href="<?php echo $this->{'Path Immagine'}; ?>" target="_blank"><img id="immagine<?php echo $this->idArticoloSpecifico;?>" src="<?php if(Zend_Registry::get('useBase64') && !is_null($this->{'Thumbnail Base64'})) echo "data:image/jpeg;base64,".$this->{'Thumbnail Base64'}; else echo $this->{'Thumbnail Path'}; ?>" alt="<?php echo $this->Marca.' '.$this->Nome?>" title="<?php echo $this->Marca.' '.$this->Nome?>" id="img<?php echo $this->idArticoloSpecifico;?>" class="imgPreview imgArticoloLista"/></a>
-            </div>
-            <div id="datiArticolo<?php echo $this->idArticoloSpecifico;?>" class="datiArticoloLista <?php echo $class;?>">
-                <div id="codiceArticolo<?php echo $this->idArticoloSpecifico;?>" class="codiceArticoloLista">
-                    <?php echo $this->{'Codice Articolo'}; ?>
-                </div>
-                <div id="marcaArticolo<?php echo $this->idArticoloSpecifico;?>" class="marcaArticoloLista">
-                <?php
-                    if ($this->layout()->config->articles->brandLinkMode=="list") {
-                 ?>
-                    <a id="marca<?php echo $this->idArticoloSpecifico;?>" href='<?php echo $this->url(array('module' => 'frontend', 'controller' => 'catalogo', 'action' => 'index'), 'default', true)."/".strtolower($this->layout()->config->language->brandNamePlur)."/".$this->Marca;?>' class="linkMarcaArticolo catalogo">
-                 <?php
-                 }
-                 echo $this->Marca;
-                 if($this->layout()->config->articles->brandLinkMode=='list') {
-                 ?>
-                    </a>
-                 <?php
-                 }
-                 ?>
-                </div>
-                <div id="nomeArticolo<?php echo $this->idArticoloSpecifico;?>" class="nomeArticoloLista">
-                    <a class="catalogo linkArticolo" id="art<?php echo $this->idArticoloSpecifico;?>" href='<?php echo $navigationEntry->uri;?>'><?php echo $this->Nome; ?></a>
-                </div>
-                <div id="prezzoArticolo<?php echo $this->idArticoloSpecifico;?>" class="prezzoArticoloLista">
-                    Prezzo:
-                    <?php if(ceil($this->{'Prezzo di vendita'}) > 0) echo new Zend_Currency(array('value' => $this->{'Prezzo di vendita'}));
-                          else echo $this->layout()->config->articles->zeroPriceText;
-                    ?>
-                </div>
-                <div id="quantitàArticolo<?php echo $this->idArticoloSpecifico;?>" class="quantitàArticoloLista">
-                    Quantità disponibile: <?php  echo $this->showQuantity($this); ?>
-                </div>
-            </div>
-        <?php
+
+<?php
+		foreach($this->layout()->listOrder as $campo)
+		{
+			switch($campo)
+			{
+				case "immagine":
+?>
+				<div id="immagineArticolo<?php echo $this->idArticoloSpecifico;?>" class="immagineArticoloLista">
+					<a rel="immagine<?php echo $this->idArticoloSpecifico;?>" href="<?php echo $navigationEntry->uri;?>" target="_blank"><img id="immagine<?php echo $this->idArticoloSpecifico;?>" src="<?php if(Zend_Registry::get('useBase64') && !is_null($this->{'Thumbnail Base64'})) echo "data:image/jpeg;base64,".$this->{'Thumbnail Base64'}; else echo "/.thumbs".$this->{'Path Immagine'}; ?>" alt="<?php echo $this->Marca.' '.$this->Nome?>" title="<?php echo $this->Marca.' '.$this->Nome?>" id="img<?php echo $this->idArticoloSpecifico;?>" class="imgPreview imgArticoloLista"/></a>
+				</div>
+<?php
+				break;
+				case "codice":
+?>
+				<div id="codiceArticolo<?php echo $this->idArticoloSpecifico;?>" class="datiArticoloLista codiceArticoloLista">
+					<?php echo $this->{'Codice Articolo'}; ?>
+				</div>
+<?php
+				break;
+				case "marca":
+?>
+				<div id="marcaArticolo<?php echo $this->idArticoloSpecifico;?>" class="datiArticoloLista marcaArticoloLista">
+					<?php
+						if ($this->layout()->config->articles->brandLinkMode=="list") {
+					?>
+						<a id="marca<?php echo $this->idArticoloSpecifico;?>" href='<?php echo $this->url(array('module' => 'frontend', 'controller' => 'catalogo', 'action' => 'index'), 'default', true)."/".strtolower($this->layout()->config->language->brandNamePlur)."/".$this->Marca;?>' class="linkMarcaArticolo catalogo">
+					<?php
+					}
+					echo $this->Marca;
+					if($this->layout()->config->articles->brandLinkMode=='list') {
+					?>
+						</a>
+					<?php
+					}
+					?>
+				</div>
+<?php
+				break;
+				case "nome":
+?>
+				<div id="nomeArticolo<?php echo $this->idArticoloSpecifico;?>" class="datiArticoloLista nomeArticoloLista">
+					<a class="catalogo linkArticolo" id="art<?php echo $this->idArticoloSpecifico;?>" href='<?php echo $navigationEntry->uri;?>'><?php echo $this->Nome; ?></a>
+				</div>
+<?php
+				break;
+				case "prezzo":
+?>
+				<div id="prezzoArticolo<?php echo $this->idArticoloSpecifico;?>" class="datiArticoloLista prezzoArticoloLista">
+					Prezzo:
+					<?php if(ceil($this->{'Prezzo di vendita'}) > 0) echo new Zend_Currency(array('value' => $this->{'Prezzo di vendita'}));
+						else echo $this->layout()->config->articles->zeroPriceText;
+					?>
+				</div>
+<?php
+				break;
+				case "quantità":
+?>
+				<div id="quantitàArticolo<?php echo $this->idArticoloSpecifico;?>" class="datiArticoloLista quantitàArticoloLista">
+					Quantità disponibile: <?php  echo $this->showQuantity($this); ?>
+				</div>
+<?php
+				break;
+				case "altro":
+					if($this->AddThis == 1) echo $this->AddThis($this->serverUrl(true),$this->articolo->Marca." ".$this->articolo->Nome);
+				break;
+			}
+		}
         if($this->layout()->config->articles->addToCartInPreview && ($this->{'Fuori Produzione'} === '0' || $this->{'Quantità'} > 0) && (ceil($this->{'Prezzo di vendita'}) > 0 || $this->layout()->config->articles->zeroPriceAdd))
         {
         ?>

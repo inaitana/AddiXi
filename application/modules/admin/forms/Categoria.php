@@ -18,12 +18,13 @@ class Admin_Form_Categoria extends Zend_Form
     }
     
     public function init()
-    {
+    {    	
         if($this->_mode == 'add')
             $this->addElement('hidden','idCategoriaPadre');
         else if($this->_mode == 'edit')
             $this->addElement('select', 'idCategoriaPadre', array(
                 'label'      => 'Cambia categoria Padre:',
+                'class'		 => 'ui-state-default ui-widget ui-corner-all',
             ));
 
         if($this->_mode != 'delete')
@@ -48,7 +49,7 @@ class Admin_Form_Categoria extends Zend_Form
                 'class'      => 'ui-widget-content ui-corner-all'
             ));
 
-            if($this->_configAdmin->articles->edit->ckeditor)
+            if($this->_configAdmin->plugins->ckeditor)
                 $class = 'ckeditor';
             else
                 $class = '';
@@ -93,7 +94,10 @@ class Admin_Form_Categoria extends Zend_Form
             'ignore' => true
         ));
 
-        $this->addDisplayGroup(array('idCategoriaPadre','conferma', 'id', 'csrf'), 'hidden',array('class' => 'hidden'));
+        $hiddenArray = array('conferma','id','csrf');
+        if($this->_mode != 'edit')
+			$hiddenArray[] = 'idCategoriaPadre';
+        $this->addDisplayGroup($hiddenArray, 'hidden',array('class' => 'hidden'));
     }
 }
 

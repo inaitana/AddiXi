@@ -140,12 +140,14 @@ class User_Bootstrap extends Zend_Application_Module_Bootstrap
     
     public function _loadViewHelpers()
     {
+        $config = Zend_Registry::get('config');
         $layout = Zend_Layout::getMvcInstance();
 
         $view = $layout->getView();
-        // BUG jQuery UI
         $view->jQuery()->uiEnable();
         $view->registerHelper(new User_View_Helper_LoginBox(), 'LoginBox');
+        if($config->SMTP->server == "")
+        	$view->registerHelper(new Application_View_Helper_DisplayMail(), 'DisplayMail');
     }
 
     public function _loadAuth()

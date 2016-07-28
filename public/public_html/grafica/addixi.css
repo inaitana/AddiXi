@@ -12,6 +12,10 @@ body {
     margin: 15px 0px;
 }
 
+img {
+	border: none;
+}
+
 a, a:visited {
     color: #3377FF;
     text-decoration: none;

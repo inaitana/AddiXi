@@ -1,6 +1,6 @@
 <div id="marche-lista" class="marche lista page ui-widget-content ui-corner-all">
     <div id="marche-lista-titolo" class="lista-titolo">
-        Lista marche
+        Lista <?php echo $this->config->language->brandNamePlur; ?>
     </div>
     <table id="marche-lista-tabella" class="lista-tabella">
         <tr>
@@ -58,7 +58,7 @@
                 modal: true,
                 position: 'center',
                 width: 'auto',
-                title: 'Elimina Marca',
+                title: 'Elimina <?php echo $this->config->language->brandNameSing?>',
                 close: function(){ $(this).dialog('destroy'); $('#marca-delete-dialog-container').remove(); $.address.parameter('Marca', ''); closeDialog();},
                 buttons: dialogButtons
             });

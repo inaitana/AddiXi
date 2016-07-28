@@ -23,15 +23,8 @@ class AddiXi_Mail {
         $mail->setSubject($this->_subject);
         $mail->setBodyHtml($this->_HtmlContent);
         $mail->setBodyText($this->_TextContent);
-
-        if(APPLICATION_ENV == 'development' || APPLICATION_ENV == 'testing')
-        {
-            echo $this->_subject."<br/>";
-            echo $this->_HtmlContent;
-            return true;
-        }
-        else
-            return $mail->send();
+        
+        return $mail->send();
     }
 
     protected function html2Text($html)

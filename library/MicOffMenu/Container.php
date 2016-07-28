@@ -31,9 +31,9 @@ class MicOffMenu_Container {
         $this->_tabsArray[$tab->getName()] = $tab;
     }
 
-    function newOrbButton($name, $label, $href, $img, $popup = false, $submits = false)
+    function newOrbButton($name, $label, $href, $img, $popup = false, $submits = false, $customJavascript = null, $customHtml = null, $customOnClose = null)
     {
-        $orbButton = new MicOffMenu_OrbButton($name, $label, $href, $img, $popup, $submits);
+        $orbButton = new MicOffMenu_OrbButton($name, $label, $href, $img, $popup, $submits, $customJavascript, $customHtml, $customOnClose);
         return $this->_orb->newOrbButton($name, $label, $href, $img, $popup, $submits);
     }
 
@@ -65,6 +65,26 @@ class MicOffMenu_Container {
     function newSelectButton($tabName, $buttonsGroupName, $property, $label = null, $action = 'List')
     {
         return $this->_tabsArray[$tabName]->newSelectButton($buttonsGroupName, $property, $label, $action);
+    }
+
+    function newRadioButton($tabName, $buttonsGroupName, $property, $label = null, $forActions = null)
+    {
+        return $this->_tabsArray[$tabName]->newRadioButton($buttonsGroupName, $property, $label, $forActions);
+    }
+
+    function newCheckboxButton($tabName, $buttonsGroupName, $property, $label = null, $forActions = null, $defaultOn = false)
+    {
+        return $this->_tabsArray[$tabName]->newCheckboxButton($buttonsGroupName, $property, $label, $forActions, $defaultOn);
+    }
+
+    function newComboboxButton($tabName, $buttonsGroupName, $property, $label = null, $showAllLabel = null, $forActions = null)
+    {
+        return $this->_tabsArray[$tabName]->newComboboxButton($buttonsGroupName, $property, $label, $showAllLabel, $forActions);
+    }
+
+    function newDatepickerButton($tabName, $buttonsGroupName, $property, $label = null, $interval = false, $showAllLabel = null, $forActions = null)
+    {
+        return $this->_tabsArray[$tabName]->newDatepickerButton($buttonsGroupName, $property, $label, $interval, $showAllLabel, $forActions);
     }
 
     function addButton($tabName, $buttonsGroupName, MicOffMenu_AbstractButton $button)

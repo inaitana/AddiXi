@@ -2,10 +2,12 @@
 class Admin_View_Helper_Uploadify extends Zend_View_Helper_Abstract
 {
     protected $_view;
+    protected $_configAdmin;
 
     public function setView(Zend_View_Interface $view)
     {
         $this->_view = $view;
+        $this->_configAdmin = Zend_Registry::get('configAdmin');
     }
 
     public function uploadify($formName, $withScriptTags = true, $onComplete)
@@ -25,7 +27,16 @@ class Admin_View_Helper_Uploadify extends Zend_View_Helper_Abstract
                     'fileDesc': 'Immagini',
                     'fileExt': '*.png;*.PNG;*.jpg;*.JPG;*.jpeg;*.JPEG;*.gif;*.GIF',
                     'sizeLimit': 1048576,
-                    'buttonText': 'SFOGLIA',
+                    'buttonText': '";
+        $output .= 				 	$this->_configAdmin->plugins->prefs->uploadifyLabel . "',";
+        
+        if(is_file(realpath(APPLICATION_PATH ."/../public/css/images/uploadify-button.png")))
+        	$output .= "
+        			'buttonImg': '/css/images/uploadify-button.png',
+        			";
+        	
+        $output .= "
+        			'height': 36,
                     'scriptData': {'AddiXi': '".Zend_Session::getId()."'},
                     'onOpen':       function()
                                     {
@@ -46,7 +57,13 @@ class Admin_View_Helper_Uploadify extends Zend_View_Helper_Abstract
 
                 $('#".$formName." object').each(
                         function() {
-                            $(this).css('width',$(this).attr('width')).css('height',$(this).attr('height'));
+                            $(this).css('width',$(this).attr('width')).css('height',$(this).attr('height'))";
+        
+				        		if($this->_configAdmin->plugins->kcfinder)
+				        				$output .= 
+				        				".css('position','absolute').css('margin-left','10px')";
+        		
+        				$output .= ";
                         }
                 );
                 ";

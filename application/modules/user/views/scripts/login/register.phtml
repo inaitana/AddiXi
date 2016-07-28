@@ -2,13 +2,4 @@
 <?php echo $this->form ?>
 <script type="text/javascript">
     $("input[type='submit']").button();
-    $("input[type='submit']").attr('disabled', 'disabled');
-    $("#Condizioni").change(
-		function() {
-			if($(this).attr('checked'))
-				$("input[type='submit']").attr('disabled', '');
-			else
-			    $("input[type='submit']").attr('disabled', 'disabled');
-		}
-	);
 </script>

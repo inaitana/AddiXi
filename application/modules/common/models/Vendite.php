@@ -15,7 +15,7 @@ class Application_Model_Vendite {
         $this->_config = Zend_Registry::get('config');
     }
 
-    public function getSalesList($filtroConfermati, $filtroEvasi = null, $filtroCliente = null)
+    public function getSalesList($filtroConfermati, $filtroEvasi = null, $filtroCliente = null, $filtroDataDa = null, $filtroDataA = null)
     {
         $filtro = 'Online = TRUE';
 
@@ -36,6 +36,15 @@ class Application_Model_Vendite {
             else
                 $filtro .= ' AND idCliente = '.$filtroCliente;
         }
+        
+        $dataDa = DateTime::createFromFormat('d/m/Y', $filtroDataDa);
+        $dataA = DateTime::createFromFormat('d/m/Y', $filtroDataA);
+        
+        if($filtroDataDa !== null)
+            $filtro .= " AND Data >= '".$dataDa->format('Y-m-d')."'";
+        if($filtroDataA !== null)
+            $filtro .= " AND Data <= '".$dataA->format('Y-m-d')."'";
+            
         return $this->_salesDb->fetchAll($filtro);
     }
 

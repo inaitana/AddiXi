@@ -9,9 +9,9 @@ class MicOffMenu_Orb {
         $this->_javascript = "";
     }
 
-    function newOrbButton($name, $label, $href, $img, $popup = false, $submits = false, $customJavascript = null)
+    function newOrbButton($name, $label, $href, $img, $popup = false, $submits = false, $customJavascript = null, $customHtml = null, $customOnClose = null)
     {
-        $orbButton = new MicOffMenu_OrbButton($name, $label, $href, $img, $popup, $submits, $customJavascript);
+        $orbButton = new MicOffMenu_OrbButton($name, $label, $href, $img, $popup, $submits, $customJavascript, $customHtml, $customOnClose);
         $this->_orbButtonsArray[$name] = $orbButton;
         return $orbButton;
     }

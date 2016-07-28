@@ -19,7 +19,6 @@ class Admin_OrdiniController extends Zend_Controller_Action
     {
         $this->_salesModel = new Admin_Model_Vendite();
         $this->view->registerHelper(new Admin_View_Helper_CustomerDialog(), 'CustomerDialog');
-        $this->view->registerHelper(new Admin_View_Helper_CustomerFilterBox(), 'CustomerFilterBox');
         $this->view->registerHelper(new Application_View_Helper_RiassuntoOrdine(), 'RiassuntoOrdine');
         
         $this->view->headTitle('Gestione Ordini | ');
@@ -34,20 +33,25 @@ class Admin_OrdiniController extends Zend_Controller_Action
 
     public function listaAction()
     {
-        $filtro = $this->getRequest()->getParam('filtro');
-        if($filtro == null)
-            $filtro = 'xx';
-
-        $filtroConfermati = $filtro[0];
-        $filtroEvasi = $filtro[1];
+        $filtroConfermati = $this->getRequest()->getParam('accettati');
+        $filtroEvasi = $this->getRequest()->getParam('evasi');
 
         $filtroCliente = $this->getRequest()->getParam('filtrocliente');
+        
+        $filtroDataDa = $this->getRequest()->getParam('datafrom');
+        $filtroDataA = $this->getRequest()->getParam('datato');
 
         $this->view->filtroCliente = $filtroCliente;
         $this->view->title = "Lista Ordini";
         $this->view->headTitle($this->view->title);
         
-        $this->view->vendite = $this->_salesModel->getSalesList($filtroConfermati, $filtroEvasi, $filtroCliente);
+        if($filtroCliente != '')
+        {
+	        $usersModel = new Application_Model_Utenti();
+	        $this->view->cliente = $usersModel->getCustomer($filtroCliente);
+        }
+        
+        $this->view->vendite = $this->_salesModel->getSalesList($filtroConfermati, $filtroEvasi, $filtroCliente, $filtroDataDa, $filtroDataA);
     }
 
     public function dettagliAction()

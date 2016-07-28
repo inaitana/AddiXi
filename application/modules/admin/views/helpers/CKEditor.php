@@ -2,31 +2,35 @@
 class Admin_View_Helper_CKEditor extends Zend_View_Helper_Abstract
 {
     protected $_view;
+    protected $_config;
     protected $_configAdmin;
 
     public function setView(Zend_View_Interface $view)
     {
         $this->_view = $view;
+        $this->_config = Zend_Registry::get('config');
         $this->_configAdmin = Zend_Registry::get('configAdmin');
     }
 
     public function CKEditor()
     {
-
-        if($this->_configAdmin->articles->edit->ckeditor)
+        if($this->_configAdmin->plugins->ckeditor)
         {
-            $formUpload = new Zend_Form();
+            if(!$this->_configAdmin->plugins->kcfinder)
+            {
+                $formUpload = new Zend_Form();
 
-            $formUpload->setName('CKEditorImageUpload');
+                $formUpload->setName('CKEditorImageUpload');
 
-            $formUpload->addElement('file','immagineCKEditor', array(
-                'destination' => realpath(APPLICATION_PATH.'/../public/immagini'),
-                'MaxFileSize' => 1048576,
-                )
-            );
+                $formUpload->addElement('file','immagineCKEditor', array(
+                    'destination' => realpath(APPLICATION_PATH.'/../public'.$this->_config->paths->images),
+                    'MaxFileSize' => 1048576,
+                    )
+                );
 
-            $formUpload->getElement('immagineCKEditor')->removeDecorator('label');
-            
+                $formUpload->getElement('immagineCKEditor')->removeDecorator('label');
+            }
+
             $output = "
                 <script type='text/javascript'>
                     $('textarea.ckeditor').each(
@@ -36,7 +40,11 @@ class Admin_View_Helper_CKEditor extends Zend_View_Helper_Abstract
                             $(this).ckeditor();
                         }
                     );
+";
 
+            if(!$this->_configAdmin->plugins->kcfinder)
+            {
+                $output .= "
                     CKEDITOR.on( 'dialogDefinition', function( ev )
                     {
                         var dialogName = ev.data.name;
@@ -74,6 +82,10 @@ class Admin_View_Helper_CKEditor extends Zend_View_Helper_Abstract
                                                         };
                         }
                     });
+                ";
+            }
+            
+            $output .= "
                 </script>";
             return $output;
         }
