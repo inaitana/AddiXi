@@ -1,0 +1,22 @@
+<h4>Per ordinare dal nostro negozio è necessario registrare un account.<br/>Se hai già un account, inserisci il tuo login e la tua password.<br/>Altrimenti, puoi effettuare la <a href="<?php echo $this->url(array('module' => 'user', 'controller' => 'login', 'action' => 'register'),'default',true)?>">registrazione</a>.</h4>
+<?php echo $this->loginForm ?>
+
+<?php
+    if(!$this->lostPasswordShow)
+    {
+?>
+<a href="#" id="lostPasswordShow">Ho smarrito la password</a>
+<?php
+    }
+?>
+<div id="lostPassword"
+<?php
+    if(!$this->lostPasswordShow)
+        echo " style='display:none'";
+?>
+     >
+    Inserisci la tua email per effettuare una richiesta di nuova password
+<?php echo $this->lostPasswordForm ?>
+</div>
+
+<?php $this->jQuery()->addOnLoad("$('input[type=\'submit\']').button(); $('#lostPasswordShow').click(function(){ $('#lostPasswordShow').hide(); $('#lostPassword').show(); });"); ?>

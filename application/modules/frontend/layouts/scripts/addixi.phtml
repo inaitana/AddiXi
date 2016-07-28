@@ -1,0 +1,97 @@
+<?php $this->jQuery()->addOnLoad("$('img.imgPreview').xTooltip({tooltipClass: 'imgPreviewBox', maxWidth: 500});")?>
+<?php echo $this->doctype();?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php
+            $settings = new Application_Model_Impostazioni();
+            echo $this->headTitle($settings->get('Titolo Base'));
+        ?>
+        <?php echo $this->headLink()->appendStylesheet('/css/catalogo.css')->appendStylesheet('/grafica/addixi.css'); ?>
+        <?php echo $this->headScript(); ?>
+        <?php echo $this->jQuery(); ?>
+    </head>
+    <body>
+	<div id="top-bg"></div>
+    <!-- inizio wrap -->
+    <div id="wrap">
+        <div id="header"></div>
+        <!-- inizio navigazione -->
+        <div  id="nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">Pagina 1</a></li>
+                <li id="attivo"><a href="/catalogo">Catalogo</a></li>
+                <li><a href="#">Pagina 2</a></li>
+                <li><a href="#">Pagina 3</a></li>
+                <li><a href="#">Pagina 4</a></li>
+            </ul>
+            <!-- fine navigazione-->
+        </div>
+
+        <!-- inizio content-wrap -->
+        <div id="content-wrap">
+            <div id="catalogo">
+                <div id="loginBox">
+                    <?php echo $this->loginBox();?>
+                </div>
+                <div id="testata">
+                    <div id="breadcrumb">
+                        <?php echo $this->navigation()->breadcrumbs()->setMinDepth(0)->setRenderInvisible(true); ?>
+                    </div>
+                    <div id="carrello">
+                        <?php
+                            if($this->mostraCarrello)
+                               echo $this->previewCart($this->mostraDettaglioCarrello);
+                        ?>
+                    </div>
+                    <div class="chiusura"></div>
+                </div>
+                <div id="contenitore">
+                    <?php echo $this->layout()->content ?>
+                </div>
+                <div class="chiusura"></div>
+            </div> <!-- fine content-wrap-->
+        </div>
+
+        <!-- inizio footer -->
+        <div id="footer-wrap">
+            <div id="footer-columns">
+                <div class="col3">
+                    <h3>Pagine</h3>
+                    <ul>
+                        <li><a href="#">Pagina 1</a></li>
+                        <li><a href="#">Pagina 2</a></li>
+                        <li><a href="#">Pagina 3</a></li>
+                    </ul>
+                </div>
+                <div class="col3 col3-center">
+                    <h3>CATALOGO</h3>
+                    <ul>
+                        <li><a href="/catalogo/">Visualizza</a></li>
+                        <li><a href="/catalogo/Offerte">Offerte speciali</a></li>
+                        <li><a href="/carrello">Carrello</a></li>
+                    </ul>
+                </div>
+                <div class="col3">
+                    <h3>Pagine</h3>
+                    <ul>
+                        <li><a href="#">Pagina 1</a></li>
+                        <li><a href="#">Pagina 2</a></li>
+                        <li><a href="#">Pagina 3</a></li>
+                    </ul>
+                </div>
+            <!-- fine colonne footer -->
+            </div>
+            <div id="footer-bottom">
+                <span style="font-size:10px;">
+                    &copy; AddiXi 2010 - Tutti i marchi sono di propriet&agrave; dei rispettivi proprietari
+                </span>
+            </div>
+        <!-- footer ends-->
+        </div>
+    <!-- wrap ends here -->
+    </div>
+    <div id="footer-bg"></div>
+    </body>
+</html>

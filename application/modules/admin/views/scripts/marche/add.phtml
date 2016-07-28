@@ -1,0 +1,32 @@
+<div id="marche-aggiungi" class="marche aggiungi page ui-widget-content ui-corner-all">
+    <div id="marche-aggiungi-titolo" class="aggiungi-titolo">
+        Aggiungi Marca
+    </div>
+    <div id="marche-aggiungi-form" class="aggiungi-form">
+<?php
+    echo $this->form;
+    echo $this->formAjaxify($this->form->getAttrib('id'));
+?>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function linkSito()
+    {
+            if($('#Sito').val().replace('http://','').length)
+            {
+                uri = $('#Sito').val();
+                if(uri.substring(0,4) != 'http')
+                    uri = 'http://' + uri;
+                if($('#linkSito').length)
+                    $('#linkSito').attr('href',uri);
+                else
+                    $('#Sito').after(' <a id="linkSito" target="_blank" href="' + uri + '">Vai a</a>');
+            }
+            else
+            {
+                $('#linkSito').remove();
+            }
+    }
+    $('#Sito').keyup(linkSito);
+</script>

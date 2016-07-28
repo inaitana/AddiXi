@@ -1,0 +1,27 @@
+<div id="categorie-dialog-elimina" class="categorie elimina dialog main">
+    <?php
+    if($this->canDelete)
+    {
+    ?>
+    <div id="categorie-dialog-elimina-testo" class="elimina-testo">
+        <p>Attenzione: hai scelto di eliminare la categoria "<?php echo $this->categoria['Nome']; ?>".</p>
+        <p>Confermi l'operazione?</p>
+    </div>
+    <div id="categorie-dialog-elimina-form" class="elimina-form">
+        <?php
+            echo $this->form;
+            echo $this->formAjaxify($this->form->getAttrib('id'),'GestisciCategoria',null,'Categoria',$this->url(array('controller' => 'categorie', 'action' => 'getSelectOptions')));
+        ?>
+    </div>
+    <?php
+    }
+    else
+    {
+    ?>
+    <div id="categorie-dialog-elimina-testo" class="elimina-testo">
+        <p>Attenzione: La categoria "<?php echo $this->categoria['Nome']; ?>" contiene degli articoli o delle sottocategorie, per cui non è possibile eliminarla.</p>
+    </div>
+<?php
+}
+?>
+</div>

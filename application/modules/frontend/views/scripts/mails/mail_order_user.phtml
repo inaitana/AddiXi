@@ -1,0 +1,13 @@
+<style>
+    li{
+        font-size: 13px;
+    }
+</style>
+<p>Salve <?php echo $this->cliente->Nome.' '.$this->cliente->Cognome; ?>,</p>
+<p>Le confermiamo l'avvenuto invio del suo ordine presso il negozio online di <?php echo $this->nomeNegozio; ?>.</p>
+<p></p>
+<?php
+    echo $this->riassuntoOrdine($this->idVendita);
+?>
+
+<p>La ringraziamo per essersi servito presso il nostro negozio.</p>

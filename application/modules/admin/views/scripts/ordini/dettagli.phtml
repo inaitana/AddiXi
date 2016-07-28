@@ -1,0 +1,308 @@
+<div id="dettagliordine-lista" class="dettagliordine lista page ui-widget-content ui-corner-all">
+    <div class="lista-titolo" id="dettagliordine-lista-titolo">
+        Dettagli Ordine <?php echo $this->vendita['Numero']; ?>
+    </div>
+    <form id="formSalvaOrdine" class="formSalvaOrdine" action="<?php echo $this->url(array('action' => 'modify')) ?>" method="post">
+    <table id="dettagliordine-lista-tabella" class="lista-tabella">
+        <tr>
+            <th>Numero:</th>
+            <th>Data:</th>
+            <th>Cliente:</th>
+            <th>SubTotale:</th>
+            <th>Spedizione:</th>
+            <th>Totale:</th>
+            <th>Stato:</th>
+        </tr>
+        <tr id="dettagliordine-lista-riga<?php echo $this->vendita['idVendita'];?>" class="lista-riga">
+            <td id="dettagliordine-lista-numero<?php echo $this->idVendita;?>" class="lista-numero">
+                <?php echo $this->vendita['Numero']; ?>
+            </td>
+            <td id="dettagliordine-lista-data<?php echo $this->vendita['idVendita'];?>" class="lista-data">
+                <?php echo date('d/m/Y',strtotime($this->vendita['Data'])); ?>
+            </td>
+            <td id="dettagliordine-lista-cliente<?php echo $this->vendita['idVendita'];?>" class="lista-cliente">
+                <a href="<?php echo $this->url(array('controller' => 'clienti', 'action' => 'dettagli'));?>" id="Cliente<?php echo $this->vendita['idCliente']?>" class="dettagliCliente">
+                <?php echo $this->vendita['Nome Cliente']; ?>
+                </a>
+            </td>
+            <td id="dettagliordine-lista-subTotale<?php echo $this->vendita['idVendita'];?>" class="lista-subTotale">
+                <?php echo new Zend_Currency(array('value' => $this->vendita['SubTotale'])); ?>
+                </td>
+            <td id="dettagliordine-lista-spedizione<?php echo $this->vendita['idVendita'];?>" class="lista-spedizione">
+                <div id="spedizione" class="clickToInput money"><?php echo new Zend_Currency(array('value' => $this->vendita['Costo Spedizione'])); ?></div>
+            </td>
+            <td id="dettagliordine-lista-totale<?php echo $this->vendita['idVendita'];?>" class="lista-totale">
+                <?php echo new Zend_Currency(array('value' => $this->vendita['Totale'],2)); ?>
+            </td>
+            <td id="dettagliordine-lista-stato<?php echo $this->vendita['idVendita'];?>" class="lista-stato">
+                <?php
+                if(!$this->vendita['Confermata'])
+                   echo "Non Accettato";
+                else
+                {
+                    if(!$this->vendita['Evasa'])
+                        echo "Accettato non evaso";
+                    else
+                        echo "Evaso";
+                }
+                ?>
+            </td>
+        </tr>
+    </table>
+    <table id="vociordine-lista-tabella" class="lista-tabella">
+        <tr>
+            <th>Descrizione:</th>
+            <th>Quantità:</th>
+            <th>Prezzo:</th>
+            <th>Importo:</th>
+            <th>Stato:</th>
+        </tr>
+        <?php
+            echo $this->partialLoop('/ordini/partials/lineaVenditaList.phtml', $this->lineeVendita);
+        ?>
+    </table>
+    <input type="hidden" id="sendMail" name="sendMail" value="0"/>
+<?php
+if(!$this->vendita['Evasa'])
+{
+?>
+    <input type="submit" name="salva" value="Salva"/>
+<?php
+}
+?>
+</form>
+<?php
+if(!$this->vendita['Evasa'])
+{
+?>
+<div id="conferma-salva" title="Inviare email?">
+	<p>Desideri anche inviare un'email al cliente per aggiornarlo sulle modifiche?</p>
+</div>
+<?php
+}
+?>
+<?php
+if(!$this->vendita['Evasa'])
+{
+?>
+ <form id="formAnnullaOrdine" class="formAnnullaOrdine" action="<?php echo $this->url(array('action' => 'delete')); ?>" method="post">
+     <input type="submit" name="annulla" value="Annulla Ordine">
+ </form>
+<div id="conferma-annulla" title="Annullo ordine?">
+	<p>Sei sicuro di voler annullare definitivamente l'ordine?</p>
+</div>
+<?php
+}
+?>
+<?php
+if(!$this->vendita['Confermata'])
+{
+    if($this->vendita['Confermabile'])
+    {
+?>
+     <form id="formConfermaOrdine" class="formConfermaOrdine" action="<?php echo $this->url(array('action' => 'confirm')); ?>" method="post">
+         <input type="submit" name="conferma" value="Conferma Ordine">
+     </form>
+    <div id="conferma-conferma" title="Confermo ordine?">
+        <p>Sei sicuro di voler accettare l'ordine? Verrà inviata un'email di conferma al cliente.</p>
+    </div>
+<?php
+    }
+}
+else
+{
+    if(!$this->vendita['Evasa'])
+    {
+?>
+     <form id="formEvadiOrdine" class="formEvadiOrdine" action="<?php echo $this->url(array('action' => 'ship')); ?>" method="post">
+         <input type="submit" name="evadi" value="Evadi Ordine">
+     </form>
+    <div id="conferma-evadi" title="Confermo invio?">
+        <p>Sei sicuro di voler marchiare l'ordine evaso? Le quantità disponibili degli articoli saranno aggiornate di conseguenza. Verrà inviata un'email di conferma al cliente.</p>
+    </div>
+<?php
+    }
+}
+?>
+</div>
+<?php echo $this->customerDialog(); ?>
+
+<?php
+if(!$this->vendita['Evasa'])
+{
+?>
+<script type="text/javascript">
+    $(function(){
+        $('.quantity, .money').xTooltip({yPosition: 'top'});
+        
+        $('.clickToInput').click(function(){
+            $(this).hide();
+            inputId = "input" + $(this).attr('id');
+            if($('#' + inputId).length == 0)
+            {
+                $(this).after("<input type='text' id='" + inputId + "'/>");
+                $('#' + inputId).attr('size',3).attr('name',$(this).attr('id')).addClass('phantomInput');
+                if($(this).hasClass('money'))
+                    $('#' + inputId).val($(this).html().replace('€&nbsp;',''));
+                else
+                    $('#' + inputId).val($(this).html());
+            }
+            else
+                $('#' + inputId).show();
+            
+            $('#' + inputId).focus();
+            $('#' + inputId).select();
+        });
+        
+        $('.phantomInput').live('blur',function(){
+            divId = $(this).attr('id').replace('input','');
+            if($(this).val().replace(',','.') != parseFloat($(this).val().replace(',','.')))
+                $(this).val('0');
+
+            if($('#' + divId).hasClass('money'))
+            {
+                $(this).val(parseFloat($(this).val().replace('.','').replace(',','.')).toFixed(2).replace('.',','));
+                $('#' + divId).html('€&nbsp;' + $(this).val()).show();
+                if(divId.indexOf('prezzo')!=-1) updateAmount(divId.replace('prezzo',''));
+            }
+            else
+            {
+                $(this).val(parseFloat($(this).val()));
+                $('#' + divId).html($(this).val()).show();
+                updateAmount(divId.replace('quantità',''));
+            }
+            
+            updateTotal();
+
+            $(this).hide();
+
+            checkChanges();
+        });
+
+        $('.phantomInput').live('keypress',function(e){if(e.keyCode == 13 || e.charCode == 13){ $(this).blur(); return false; } });
+    });
+
+    function updateAmount(lineId)
+    {
+        $('#importo' + lineId).html('€&nbsp;' + (parseFloat($('#prezzo' + lineId).html().replace('€&nbsp;','').replace(',','.')) * $('#quantità' + lineId).html()).toFixed(2).replace('.',','));
+    }
+
+    function updateTotal()
+    {
+        subtotal = 0;
+        $('.importoLineaOrdine').each(function(){
+            subtotal = subtotal + parseFloat($(this).html().replace('€&nbsp;','').replace(',','.'));
+        });
+        $('.lista-subTotale').html('€&nbsp;' + subtotal.toFixed(2).replace('.',','));
+        total = subtotal + parseFloat($('#spedizione').html().replace('€&nbsp;','').replace(',','.'));
+        $('.lista-totale').html('€&nbsp;' + total.toFixed(2).replace('.',','));
+    }
+    
+    function checkChanges()
+    {
+        $('.money').each(function()
+        {
+            if(parseFloat($(this).html().replace('€&nbsp;','')) <= 0)
+            {
+                $(this).addClass('errors');
+                if($(this).attr('id') == 'spedizione')
+                    $(this).attr('title','Specifica un costo di spedizione');
+                else
+                    $(this).attr('title','Specifica un prezzo');
+            }
+            else
+            {
+                $(this).removeClass('errors');
+                $(this).attr('title','');
+            }
+        });
+
+        $('.quantity').each(function()
+        {
+            if(parseInt($(this).html()) > parseInt($('#disponibile' + $(this).attr('id').replace('quantità','')).val()))
+                $(this).addClass('errors');
+            else
+                $(this).removeClass('errors');
+        })
+    }
+
+    checkChanges();
+    
+    $("#conferma-salva").dialog({
+        autoOpen: false,
+        resizable: false,
+        modal: true,
+        width: 'auto',
+        buttons: {
+            'Invia email' : function() {
+                $('#sendMail').val('1');
+                submitformSalvaOrdine();
+                $(this).dialog('close');
+            },
+            'Salva soltanto' : function() {
+                $('#sendMail').val('0');
+                submitformSalvaOrdine();
+                $(this).dialog('close');
+            },
+            'Annulla' : function() {
+                $(this).dialog('close');
+            }
+        }
+    });
+
+    $("#conferma-annulla").dialog({
+        autoOpen: false,
+        resizable: false,
+        modal: true,
+        width: 'auto',
+        buttons: {
+            'Si' : function() {
+                submitformAnnullaOrdine();
+                $(this).dialog('close');
+            },
+            'No' : function() {
+                $(this).dialog('close');
+            }
+        }
+    });
+
+    $("#conferma-conferma").dialog({
+        autoOpen: false,
+        resizable: false,
+        modal: true,
+        width: 'auto',
+        buttons: {
+            'Si' : function() {
+                submitformConfermaOrdine();
+                $(this).dialog('close');
+            },
+            'No' : function() {
+                $(this).dialog('close');
+            }
+        }
+    });
+
+    $("#conferma-evadi").dialog({
+        autoOpen: false,
+        resizable: false,
+        modal: true,
+        width: 'auto',
+        buttons: {
+            'Si' : function() {
+                submitformEvadiOrdine();
+                $(this).dialog('close');
+            },
+            'No' : function() {
+                $(this).dialog('close');
+            }
+        }
+    });
+</script>
+
+<?php
+    echo $this->formAjaxify('formSalvaOrdine',null,'conferma-salva');
+    echo $this->formAjaxify('formAnnullaOrdine','Ordine','conferma-annulla');
+    echo $this->formAjaxify('formConfermaOrdine',null,'conferma-conferma');
+    echo $this->formAjaxify('formEvadiOrdine',null,'conferma-evadi');
+}
+?>

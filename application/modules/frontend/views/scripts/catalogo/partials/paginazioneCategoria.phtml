@@ -1,0 +1,40 @@
+<?php if ($this->pageCount>1): ?>
+    <?php echo $this->firstItemNumber; ?> - <?php echo $this->lastItemNumber; ?> di <?php echo $this->totalItemCount; ?>
+
+    <!-- Prima pagina -->
+    <?php if (isset($this->previous)): ?>
+        <a class="catalogo paginaCategoria" href="<?php echo urldecode($this->url(array('page' => $this->first))); ?>">Prima</a> |
+    <?php else: ?>
+        <span class="disabled">Prima</span> |
+    <?php endif; ?>
+
+    <!-- Precedente pagina -->
+    <?php if (isset($this->previous)): ?>
+        <a class="catalogo paginaCategoria" href="<?php echo urldecode($this->url(array('page' => $this->previous))); ?>">&lt; Precedente</a> |
+    <?php else: ?>
+        <span class="disabled">&lt; Precedente</span> |
+    <?php endif; ?>
+
+    <!-- Pagine numerate -->
+    <?php foreach ($this->pagesInRange as $page): ?>
+        <?php if ($page != $this->current): ?>
+            <a class="catalogo paginaCategoria" href="<?php echo urldecode($this->url(array('page' => $page))); ?>"><?php echo $page; ?></a> |
+        <?php else: ?>
+            <?php echo $page; ?> |
+        <?php endif; ?>
+    <?php endforeach; ?>
+
+    <!-- Prossima pagina -->
+    <?php if (isset($this->next)): ?>
+        <a class="catalogo paginaCategoria" href="<?php echo urldecode($this->url(array('page' => $this->next))); ?>">Prossima &gt;</a> |
+    <?php else: ?>
+        <span class="disabled">Prossima &gt;</span> |
+    <?php endif; ?>
+
+    <!-- Ultima pagina -->
+    <?php if (isset($this->next)): ?>
+        <a class="catalogo paginaCategoria" href="<?php echo urldecode($this->url(array('page' => $this->last))); ?>">Ultima</a>
+    <?php else: ?>
+        <span class="disabled">Ultima</span>
+    <?php endif; ?>
+<?php endif; ?>

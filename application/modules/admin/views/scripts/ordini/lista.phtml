@@ -1,0 +1,32 @@
+<div id="ordini-lista" class="ordini lista page ui-widget-content ui-corner-all">
+    <?php echo $this->customerFilterBox($this->filtroCliente); ?>
+    <div id="ordini-lista-titolo" class="lista-titolo">
+        Lista Ordini
+    </div>
+    <table id="ordini-lista-tabella" class="lista-tabella">
+        <tr>
+            <th>Numero:</th>
+            <th>Data:</th>
+            <th>Cliente:</th>
+            <th>SubTotale:</th>
+            <th>Spedizione:</th>
+            <th>Totale:</th>
+            <th>Stato:</th>
+            <th>&nbsp;</th>
+        </tr>
+        <?php
+            echo $this->partialLoop('/ordini/partials/venditaList.phtml', $this->vendite);
+        ?>
+    </table>
+</div>
+<script type="text/javascript">
+    $('.dettagliOrdine').button().click(
+        function(){
+            $.address.parameter('Ordine', $(this).attr('id').replace('dettagliOrdine',''));
+            $.address.parameter('action','dettagli');
+            updateHash();
+            return false;
+        }
+    );
+</script>
+<?php echo $this->customerDialog(); ?>

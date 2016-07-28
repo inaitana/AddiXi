@@ -1,0 +1,12 @@
+<div id="categorie-aggiungi" class="categorie aggiungi page ui-widget-content ui-corner-all">
+    <div id="categorie-aggiungi-titolo" class="aggiungi-titolo">
+        Aggiungi Categoria
+    </div>
+    <div id="categorie-aggiungi-form" class="aggiungi-form">
+        <?php
+            echo $this->form;
+            echo $this->formAjaxify($this->form->getAttrib('id'),'Categoria',null,'Categoria',$this->url(array('controller' => 'categorie', 'action' => 'getSelectOptions')));
+        ?>
+    </div>
+</div>
+<?php echo $this->CKEditor(); ?>

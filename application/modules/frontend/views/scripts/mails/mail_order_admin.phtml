@@ -1,0 +1,11 @@
+<style>
+    li{
+        font-size: 13px;
+    }
+</style>
+<p>Salve,</p>
+<p>Le segnaliamo che è stato effettuato un nuovo ordine presso il negozio online di <?php echo $this->nomeNegozio; ?>.</p>
+<p></p>
+<?php
+    echo $this->riassuntoOrdine($this->idVendita, true);
+?>

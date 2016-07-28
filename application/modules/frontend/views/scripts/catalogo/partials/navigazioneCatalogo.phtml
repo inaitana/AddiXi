@@ -1,0 +1,123 @@
+<div id="navigazione">
+    <?php echo $this->navigation()->menu()->renderMenu($this->navigation()->findById('CatalogoHome')); ?>
+</div>
+
+<?php $this->headScript()->captureStart(); ?>
+function followStep() {
+    step = getStep(true);
+    if(step) location.href = step;
+}
+
+followStep();
+
+function bindClicks() {
+    $('a.catalogo').live('click',function(){
+        window.lastclicked = this;
+        
+        if($(this).hasClass('padre'))
+            $(this).parent().children('ul').show();
+
+        $.address.parameter('step',encodeURIComponent($(this).attr('href')));
+        $('#returnTo').val($(this).attr('href'));
+        
+        if(!$(this).hasClass('linkArticolo') && !$(this).hasClass('paginaCategoria'))
+            $.address.parameter('cat',$(this).attr('id').replace('breadcrumbs','menu'));
+
+        updateHash();
+        
+        return false;
+    });
+}
+
+function activateCategory(category) {
+    $('.active').removeClass('active');
+    $('#'+category).parents('li').show();
+    $('#'+category).parents('li').addClass('active');
+}
+
+function updateBreadCrumb() {
+    <?php if($this->layout()->config->breadcrumb->separateAjax)
+    {
+    ?>
+        step = getStep();
+        $('#breadcrumb').load('/catalogo/updateBreadcrumb',{step: step, ajax: true});
+    <?php
+    }
+    else
+    {
+    ?>
+        $('#breadcrumb').html($('#newbreadcrumb').html());
+        $('#newbreadcrumb').remove();
+    <?php
+    }
+?>
+}
+
+function getStep(nojquery) {
+    if(nojquery)
+    {
+        stepStart = location.hash.indexOf('step');
+        if(stepStart!=-1)
+        {
+            stepEnd = location.hash.indexOf('&');
+            if(stepEnd == -1)
+                step = location.hash.substring(stepStart+5);
+            else
+                step = location.hash.substring(stepStart+5,stepEnd);
+        }
+        else
+            step = false;
+    }
+    else
+        step = $.address.parameter('step');
+
+    if (step)
+        return decodeURIComponent(decodeURI(step));
+    else
+        return false;
+}
+
+function updateHash() {
+    if(getBusy()!=true)
+        $.address.update();
+}
+
+function handleHash() {
+    getBusy(true);
+    step = getStep();
+    categoria = $.address.parameter('cat');
+
+    if(step)
+        $.post(step,{ajax: true},function(data){ $('#articoli').replaceWith(data); updateBreadCrumb(); getBusy(false); window.scroll(0,0);});
+    else
+        $.post(location.href.replace('#',''),{ajax: true},function(data){ $('#articoli').replaceWith(data); getBusy(false); window.scroll(0,0);});
+
+    if(categoria)
+        activateCategory(categoria);
+}
+
+function getBusy(busy) {
+    if(busy==true && window.busy == false)
+    {
+        $(window.lastclicked).after('<span id="loading" class="loading"><img class="imgloading" src="/css/images/loading.gif"/></span>');
+        $('#loading').hide().fadeIn(300);
+        window.busy = true;
+    }
+    else if(busy==false)
+    {
+        $('.loading').fadeOut(300, function(){$('.loading').remove()});
+        window.busy = false;
+    }
+    return window.busy;
+}
+
+<?php $this->headScript()->captureEnd(); ?>
+
+<?php $this->jQuery()->onLoadCaptureStart(); ?>   
+bindClicks();
+
+$.address.autoUpdate(false);
+$.address.change(function(event) {
+    handleHash();
+});
+<?php $this->jQuery()->onLoadCaptureEnd(); ?>

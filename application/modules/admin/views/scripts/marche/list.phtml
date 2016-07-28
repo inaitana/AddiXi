@@ -1,0 +1,67 @@
+<div id="marche-lista" class="marche lista page ui-widget-content ui-corner-all">
+    <div id="marche-lista-titolo" class="lista-titolo">
+        Lista marche
+    </div>
+    <table id="marche-lista-tabella" class="lista-tabella">
+        <tr>
+            <th>Nome:</th>
+            <th>Sito:</th>
+            <th>Azioni:</th>
+        </tr>
+        <?php
+            echo $this->partialLoop('/marche/partials/marcaList.phtml', $this->marche);
+        ?>
+    </table>
+</div>
+<script type="text/javascript">
+    $('.editaMarca').button().bind('click',function() {
+        $.address.parameter('Marca',$(this).attr('id').replace('editaMarca',''));
+        $.address.parameter('action','Edit-Marche');
+        updateHash();
+        return false;
+    });
+
+    $('.eliminaMarca').button().bind('click',function(e) {
+        if(!$(e.currentTarget).hasClass('disabled'))
+        {
+            window.stopUpdate = true;
+            $.address.parameter('Marca',$(this).attr('id').replace('eliminaMarca',''));
+            $.address.parameter('dialog','eliminaMarca');
+            updateHash();
+            window.stopUpdate = false;
+        }
+        return false;
+    });
+
+    function openeliminaMarca()
+    {
+        idMarca = $.address.parameter('Marca');
+        $('<div id=marca-delete-dialog-container class=dialog-container></div>').hide().appendTo('body').load($('.eliminaMarca').attr('href'),{ajax: true, marca : idMarca}, function()
+        {
+            canDelete = $('#conferma').length;
+            if(canDelete)
+                dialogButtons = {
+                                    'Si' : function() {
+                                        $('#formDelete').submit();
+                                    },
+                                    'No' : function() {
+                                        $(this).dialog('close');
+                                    }
+                };
+            else
+                dialogButtons = {
+                                    'Chiudi' : function() {
+                                            $(this).dialog('close');
+                                    }
+                };
+            $('#marca-delete-dialog-container').dialog({
+                modal: true,
+                position: 'center',
+                width: 'auto',
+                title: 'Elimina Marca',
+                close: function(){ $(this).dialog('destroy'); $('#marca-delete-dialog-container').remove(); $.address.parameter('Marca', ''); closeDialog();},
+                buttons: dialogButtons
+            });
+        });
+    }
+</script>

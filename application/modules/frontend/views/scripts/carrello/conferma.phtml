@@ -1,0 +1,47 @@
+<div id="confermaOrdine">
+<?php
+if($this->success)
+{
+?>
+<h4>
+    Il suo ordine è stato inviato al negoziante.
+</h4>
+<?php
+}
+else if(false)
+{
+	echo "Spiacente, il servizio è in manutenzione, la invitiamo a riprovare tra qualche minuto.";
+}
+else
+{
+?>
+<h4>
+    Il suo ordine sta per essere inviato.<br/>
+    La preghiamo di segnalare eventuali modifiche sull'indirizzo di spedizione.<br/>
+    Per qualsiasi ulteriore comunicazione può utilizzare la sezione Note.
+</h4>
+<?php
+    echo $this->form;
+}
+?>
+</div>
+<script type="text/javascript">
+    $(function(){
+        function NewAddress()
+        {
+            if($('#NewAddress').attr('checked'))
+            {
+                $('#fieldset-dati :input').not('#NewAddress').attr('readonly',false);
+                $('#fieldset-dati label').not('.optional').addClass('required');
+            }
+            else
+            {
+                $('#fieldset-dati :input').not('#NewAddress').attr('readonly',true);
+                $('#fieldset-dati label').not('.optional').removeClass('required');
+            }
+        }
+        $('#NewAddress').click(function(){NewAddress();});
+        NewAddress();
+    });
+    $("#confermaOrdine input[type='submit']").button();
+</script>

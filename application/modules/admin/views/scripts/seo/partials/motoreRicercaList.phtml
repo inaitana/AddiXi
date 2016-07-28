@@ -1,0 +1,32 @@
+<?php
+    $class = $this->partialCounter%2==0?"pari":"dispari";
+    if($this->{'URL Ping Sitemap'} != '')
+    {
+?>
+<div id="motore<?php echo $this->idMotore; ?>" class ="pannelloSeo-aggiornaSitemap-motore">
+    <div id="nomeMotore<?php echo $this->idMotore; ?>" class="pannelloSeo-aggiornaSitemap-motore-nome">
+        <?php echo $this->{'Nome Motore'}; ?>
+    </div>
+    <div id="ultimoPingMotore<?php echo $this->idMotore; ?>" class="pannelloSeo-aggiornaSitemap-motore-ultimoPing">
+        <span id="ultimoPingMotore<?php echo $this->idMotore; ?>-text" class="pannelloSeo-aggiornaSitemap-motore-ultimoPing-text">Ultimo Invio:</span>
+        <span id="ultimoPingMotore<?php echo $this->idMotore; ?>-date" class="pannelloSeo-aggiornaSitemap-motore-ultimoPing-date"><?php
+            if($this->{'Ultimo Ping Sitemap'} == null)
+                echo "Mai";
+            else
+            {
+                $timestamp = new Zend_Date($this->{'Ultimo Ping Sitemap'});
+                echo $timestamp->toString();
+            }
+            ?>
+        </span>
+    </div>
+    <div id="formPingMotore<?php echo $this->idMotore; ?>" class="pannelloSeo-aggiornaSitemap-motore-form">
+        <form method="post" action="<?php echo $this->url(array('module' => 'admin', 'controller' => 'SEO', 'action' => 'ping')); ?>" class="InvioSitemap" id="PingMotore<?php echo $this->idMotore; ?>">
+            <input type="hidden" name="idMotore" value="<?php echo $this->idMotore; ?>"/>
+            <input type="submit" value="Invia Sitemap">
+        </form>
+    </div>
+</div>
+<?php
+    }
+?>

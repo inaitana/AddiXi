@@ -1,0 +1,174 @@
+<div id="cliente-dialog<?php echo $this->cliente->idCliente; ?>" class="main dialog cliente">
+    <table id="cliente-dialog-tabella<?php echo $this->cliente->idCliente; ?>" class="dialog-tabella">
+        <tr>
+            <th>Nome:</th>
+            <td id="cliente-dialog-nome<?php echo $this->cliente->idCliente; ?>" class="dialog-nome">
+                <?php echo $this->cliente->Nome; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Cognome:</th>
+            <td id="cliente-dialog-cognome<?php echo $this->cliente->idCliente; ?>" class="dialog-cognome">
+                <?php echo $this->cliente->Cognome; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Intestazione:</th>
+            <td id="cliente-dialog-intestazione<?php echo $this->cliente->idCliente; ?>" class="dialog-intestazione">
+                <?php echo $this->cliente->Intestazione; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Partita IVA:</th>
+            <td id="cliente-dialog-IVA<?php echo $this->cliente->idCliente; ?>" class="dialog-IVA">
+                <?php echo $this->cliente->{'Partita IVA'}; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Codice Fiscale:</th>
+            <td id="cliente-dialog-CF<?php echo $this->cliente->idCliente; ?>" class="dialog-CF">
+                <?php echo $this->cliente->{'Codice Fiscale'}; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Indirizzo:</th>
+            <td id="cliente-dialog-indirizzo<?php echo $this->cliente->idCliente; ?>" class="dialog-indirizzo">
+                <?php echo $this->cliente->Indirizzo; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>CAP:</th>
+            <td id="cliente-dialog-CAP<?php echo $this->cliente->idCliente; ?>" class="dialog-CAP">
+                <?php echo $this->cliente->CAP; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Città:</th>
+            <td id="cliente-dialog-città<?php echo $this->cliente->idCliente; ?>" class="dialog-città">
+                <?php echo $this->cliente->Città; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Provincia:</th>
+            <td id="cliente-dialog-provincia<?php echo $this->cliente->idCliente; ?>" class="dialog-provincia">
+                <?php echo $this->cliente->Provincia; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td id="cliente-dialog-email<?php echo $this->cliente->idCliente; ?>" class="dialog-email">
+                <?php echo $this->cliente->Email; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Nominativo Riferimento:</th>
+            <td id="cliente-dialog-nominativo<?php echo $this->cliente->idCliente; ?>" class="dialog-nominativo">
+                <?php echo $this->cliente->{'Nominativo Riferimento'}; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Note:</th>
+            <td id="cliente-dialog-note<?php echo $this->cliente->idCliente; ?>" class="dialog-note">
+                <?php echo $this->cliente->Note; ?>
+            </td>
+        </tr>
+    </table>
+    <table id="cliente-utente-dialog-tabella" class="dialog-tabella">
+        <tr>
+            <th>Nome Utente:</th>
+            <td id="cliente-utente-dialog-nomeUtente" class="dialog-nomeUtente">
+                <?php echo $this->cliente->{'Nome Utente'}; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Data Registrazione:</th>
+            <td id="cliente-utente-dialog-data" class="dialog-data">
+                <?php echo $this->cliente->{'Data Registrazione'}; ?>
+            </td>
+        </tr>
+    </table>
+<?php
+    if(!$this->cliente->Principale)
+    {
+?>
+    <div id="cliente-principale-dialog-testo" class="dialog-testo">
+        I dettagli di questo cliente non sono quelli principali dell'account utilizzato. I dettagli principali sono:
+    </div>
+    <table id="cliente-principale-dialog-tabella<?php echo $this->clientePrincipale->idCliente; ?>" class="dialog-tabella">
+        <tr>
+            <th>Nome:</th>
+            <td id="cliente-principale-dialog-nome<?php echo $this->clientePrincipale->idCliente; ?>" class="dialog-nome">
+                <?php echo $this->clientePrincipale->Nome; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Cognome:</th>
+            <td id="cliente-principale-dialog-cognome<?php echo $this->clientePrincipale->idCliente; ?>" class="dialog-cognome">
+                <?php echo $this->clientePrincipale->Cognome; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Intestazione:</th>
+            <td id="cliente-principale-dialog-intestazione<?php echo $this->clientePrincipale->idCliente; ?>" class="dialog-intestazione">
+                <?php echo $this->clientePrincipale->Intestazione; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Partita IVA:</th>
+            <td id="cliente-principale-dialog-IVA<?php echo $this->clientePrincipale->idCliente; ?>" class="dialog-IVA">
+                <?php echo $this->clientePrincipale->{'Partita IVA'}; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Codice Fiscale:</th>
+            <td id="cliente-principale-dialog-CF<?php echo $this->clientePrincipale->idCliente; ?>" class="dialog-CF">
+                <?php echo $this->clientePrincipale->{'Codice Fiscale'}; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Indirizzo:</th>
+            <td id="cliente-principale-dialog-indirizzo<?php echo $this->clientePrincipale->idCliente; ?>" class="dialog-indirizzo">
+                <?php echo $this->clientePrincipale->Indirizzo; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>CAP:</th>
+            <td id="cliente-principale-dialog-CAP<?php echo $this->clientePrincipale->idCliente; ?>" class="dialog-CAP">
+                <?php echo $this->clientePrincipale->CAP; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Città:</th>
+            <td id="cliente-principale-dialog-città<?php echo $this->clientePrincipale->idCliente; ?>" class="dialog-città">
+                <?php echo $this->clientePrincipale->Città; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Provincia:</th>
+            <td id="cliente-principale-dialog-provincia<?php echo $this->clientePrincipale->idCliente; ?>" class="dialog-provincia">
+                <?php echo $this->clientePrincipale->Provincia; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td id="cliente-principale-dialog-email<?php echo $this->clientePrincipale->idCliente; ?>" class="dialog-email">
+                <?php echo $this->clientePrincipale->Email; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Nominativo Riferimento:</th>
+            <td id="cliente-principale-dialog-nominativo<?php echo $this->clientePrincipale->idCliente; ?>" class="dialog-nominativo">
+                <?php echo $this->clientePrincipale->{'Nominativo Riferimento'}; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Note:</th>
+            <td id="cliente-principale-dialog-note<?php echo $this->clientePrincipale->idCliente; ?>" class="dialog-note">
+                <?php echo $this->clientePrincipale->Note; ?>
+            </td>
+        </tr>
+    </table>
+</div>
+<?php
+    }
+?>

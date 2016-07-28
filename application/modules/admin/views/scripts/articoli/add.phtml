@@ -1,0 +1,50 @@
+<div id="articoli-aggiungi" class="articoli aggiungi page ui-widget-content ui-corner-all">
+    <div id="articoli-aggiungi-titolo" class="aggiungi-titolo">
+        Aggiungi Articolo
+    </div>
+    <div id="articoli-aggiungi-form" class="aggiungi-form">
+
+    <img id="form-immagine" style="display:none" class='imgPreview aggiungi-immagine'/>
+
+<?php
+    echo $this->form;
+    echo $this->formAjaxify($this->form->getAttrib('id'),'Categoria');
+?>
+    </div>
+</div>
+
+<?php echo $this->CKEditor(); ?>
+<script type="text/javascript">
+    $('img.imgPreview').xTooltip({tooltipClass: 'imgPreviewBox'});
+    function mostraNuovaMarca(status)
+    {
+        if(status)
+        {
+            $('#NuovaMarca-element').show();
+            $('#NuovaMarca-label').show();
+            if($('#NuovaMarca').val()=='hidden')
+                $('#NuovaMarca').val('');
+        }
+        else
+        {
+            $('#NuovaMarca').val('hidden');
+            $('#NuovaMarca-element').hide();
+            $('#NuovaMarca-label').hide();
+        }
+    }
+    $(function(){
+        if($('#NuovaMarca').val()=='hidden')
+            mostraNuovaMarca(false);
+        else
+            mostraNuovaMarca(true);
+
+        $('#idMarca').change(
+            function(){
+                if($(this).val()=='nuova')
+                    mostraNuovaMarca(true);
+                else
+                    mostraNuovaMarca(false);
+            }
+        );
+    });
+</script>

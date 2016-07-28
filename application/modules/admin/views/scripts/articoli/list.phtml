@@ -1,0 +1,99 @@
+<div id="articoli-lista" class="articoli lista page ui-widget-content ui-corner-all">
+    <div id="articoli-categoria" class="articoli-categoria">
+        <div id="articoli-categoria-nome" class="lista-titolo">
+            <?php echo $this->categoria->getNome(); ?>
+        </div>
+    </div>
+<?php if(count($this->articoli))
+{
+?>
+    <table id="articoli-lista-tabella" class="lista-tabella">
+        <tr>
+            <th>Codice:</th>
+            <th><?php echo $this->config->language->brandNameSing ?>:</th>
+            <th>Nome:</th>
+            <th>Prezzo:</th>
+            <th>Quantità:</th>
+            <th>Azioni:</th>
+        </tr>
+        <?php
+            echo $this->partialLoop('/articoli/partials/articoloList.phtml', $this->articoli);
+        ?>
+    </table>
+<?php
+}
+else
+{
+?>
+    <div id="articoli-lista-vuota" class="lista-vuota">
+        Nessun articolo per la categoria selezionata.
+    </div>
+<?php
+}
+?>
+</div>
+<script type="text/javascript">
+    $('.editaArticolo').button().bind('click',function() {
+        $.address.parameter('Articolo',$(this).attr('id').replace('editaArticolo',''));
+        $.address.parameter('action','Edit');
+        updateHash();
+        return false;
+    });
+
+    $('.eliminaArticolo').button().bind('click',function(e) {
+        if(!$(e.currentTarget).hasClass('disabled'))
+        {
+            window.stopUpdate = true;
+            $.address.parameter('Articolo',$(this).attr('id').replace('eliminaArticolo',''));
+            $.address.parameter('dialog','eliminaArticolo');
+            updateHash();
+            window.stopUpdate = false;
+        }
+        return false;
+    });
+
+    $('.attivaArticolo').button().bind('click',function() {
+        $.post('articoli/activate', {'ajax': true, 'articolo' : $(this).attr('id').replace('attivaArticolo','')}, function(){ updateHash(); });
+        return false;
+    });
+
+    $('.disattivaArticolo').button().bind('click',function() {
+        $.post('articoli/deactivate', {'ajax': true, 'articolo' : $(this).attr('id').replace('disattivaArticolo','')}, function(){ updateHash(); });
+        return false;
+    });
+
+    function openeliminaArticolo()
+    {
+        idArticolo = $.address.parameter('Articolo');
+        $('<div id=articolo-delete-dialog-container class=dialog-container></div>').hide().appendTo('body').load($('.eliminaArticolo').attr('href'),{ajax: true, articolo : idArticolo}, function()
+        {
+            canDelete = $('#conferma').length;
+            if(canDelete)
+                dialogButtons = {
+                                    'Si' : function() {
+                                        $('#formDelete').submit();
+                                    },
+                                    'No' : function() {
+                                        $(this).dialog('close');
+                                    }
+                };
+            else
+                dialogButtons = {
+                                    'Chiudi' : function() {
+                                            $(this).dialog('close');
+                                    }
+                };
+            $('#articolo-delete-dialog-container').dialog({
+                modal: true,
+                position: 'center',
+                width: 'auto',
+                title: 'Elimina Articolo',
+                close: function(){ $(this).dialog('destroy'); $('#articolo-delete-dialog-container').remove(); $.address.parameter('Articolo', ''); closeDialog();},
+                buttons: dialogButtons
+            });
+        });
+    }
+</script>
+
+
+

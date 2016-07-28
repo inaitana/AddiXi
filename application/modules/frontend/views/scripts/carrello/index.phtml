@@ -1,0 +1,122 @@
+<div id='checkoutCarrello'>
+    <div id="checkoutCarrello-text">Riassunto Carrello:</div>
+<?php
+    $notEmpty = false;
+    $unknownPrice = false;
+    $noticeOverQuantity = false;
+    
+    echo "<table id='tabellaCheckout'>
+        <tr>
+        <th>Nome:</th>
+        <th>Quantità:</th>
+        <th>Prezzo:</th>
+        <th></th>
+        </tr>";
+    foreach($this->carrello as $articolo)
+    {
+        $notEmpty = true;
+        if(ceil($articolo['Prezzo']) <= 0)
+            $unknownPrice = true;
+
+        if($articolo['Quantità Carrello'] > $articolo['Quantità'])
+        {
+            $noticeOverQuantity = true;
+            $overQuantity = true;
+        }
+        else
+            $overQuantity = false;
+        
+        $formModifica = new Zend_Form();
+        $formModifica->setDisableLoadDefaultDecorators(true);
+
+        $formModifica->setName('modificaArticolo');
+        $formModifica->setAttrib('class','modificaArticolo');
+
+        $formModifica->setAction($this->url(array('module' => 'frontend', 'controller' => 'carrello', 'action' => 'edit'),'default'));
+        $formModifica->setMethod('post');
+
+        $formModifica->addElement('hidden','articolo',array('value' => $articolo['idArticoloSpecifico']));
+
+        $formModifica->addElement('hidden','returnTo',array('value' => $this->ServerUrl(true)));
+
+        $formModifica->addElement('text', 'quantità', array(
+            'filters'    => array('StringTrim'),
+            'validators' => array('Digits'),
+            'size'       => 2,
+            'maxlength'  => 4,
+            'value'      => $articolo['Quantità Carrello']
+        ));
+
+        $formModifica->addElement('submit','Modifica',array('label' => 'Modifica'));
+
+        $formModifica->addElement('hash','csrfModifica');
+
+        $formModifica->addDisplayGroup(array('csrfModifica','returnTo','articolo'), 'hidden',array('class' => 'hidden'));
+
+
+        $formElimina = new Zend_Form();
+        $formElimina->setDisableLoadDefaultDecorators(true);
+
+        $formElimina->setName('eliminaArticolo');
+        $formElimina->setAttrib('class','eliminaArticolo');
+
+        $formElimina->setAction($this->url(array('module' => 'frontend', 'controller' => 'carrello', 'action' => 'remove'),'default'));
+        $formElimina->setMethod('post');
+
+        $formElimina->addElement('hidden','articolo',array('value' => $articolo['idArticoloSpecifico']));
+
+        $formElimina->addElement('hidden','returnTo',array('value' => $this->ServerUrl(true)));
+
+        $formElimina->addElement('submit','Rimuovi',array('label' => 'Rimuovi'));
+
+        $formElimina->addElement('hash','csrfElimina');
+
+        $formElimina->addDisplayGroup(array('csrfElimina','returnTo','articolo'), 'hidden',array('class' => 'hidden'));
+
+
+        echo "<tr id='articoloCheckout".$articolo['idArticoloSpecifico']."' class='articoloCarrello'>
+                <td class='nomeArticoloCheckout'><a class='catalogo' href='".$this->navigation()->findById($articolo['idCategoria'])->uri.'/'.preg_replace("/[^\w]/","_",$articolo['Marca']." ".$articolo['Nome']).".html"."'>".$articolo['Nome']."</a></td>
+                <td class='quantitàArticoloCheckout'>".$articolo['Quantità Carrello'];
+        if($overQuantity) echo "*";
+        echo "</td>
+                <td class='prezzoArticoloCheckout'>";
+        $price = new Zend_Currency(array('value' => $articolo['Prezzo']));
+        echo $price->mul($articolo['Quantità Carrello']);
+        echo "</td>
+                <td class='azioniArticoloCheckout'><div>".$formModifica.$formElimina."</div></td>
+            </tr>";
+    }
+    echo "<tr class='totaleCheckout'><td>Totale</td><td>".$this->numeroArticoli."</td><td>".$this->prezzoTotale."</td></tr>";
+    echo "</table>";
+
+    if($unknownPrice)
+        echo "<div id='unknownPrice'>N.B: Alcuni degli articoli richiesti non hanno un prezzo specificato. Il loro prezzo le verrà comunicato via email in seguito all'ordine, dopo di che potrà scegliere se proseguire con l'ordine o meno.</div>";
+
+    if($noticeOverQuantity)
+        echo "<div id='noticeOverQuantity'>N.B: Gli articoli indicati da un asterisco sono disponibili in quantità minore di quella desiderata. In caso di richiesta d'ordine, riceverà ulteriori informazioni sulla loro effettiva disponibilità e sulle tempistiche.</div>";
+
+    if($notEmpty)
+    {
+        $formCheckout = new Zend_Form();
+        $formCheckout->setDisableLoadDefaultDecorators(true);
+
+        $formCheckout->setName('checkoutForm');
+        $formCheckout->setAttrib('class','checkoutForm');
+
+        $formCheckout->setAction($this->url(array('module' => 'frontend', 'controller' => 'carrello', 'action' => 'conferma'),'default'));
+        $formCheckout->setMethod('post');
+
+        $formCheckout->addElement('hash','csrf');
+
+        $formCheckout->addElement('submit','Checkout',array('label' => 'Checkout'));
+
+        $formCheckout->clearDecorators()->addDecorators(array('FormElements','Form'))->setElementDecorators(array('ViewHelper'));
+
+        echo $formCheckout;
+    }
+?>
+    <a id="tornaCatalogo" class='catalogo' href="/catalogo">Torna al Catalogo</a>
+</div>
+<script type="text/javascript">
+    $("#checkoutCarrello input[type='submit']").button();
+</script>

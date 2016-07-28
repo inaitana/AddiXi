@@ -1,0 +1,158 @@
+<?php
+if(isset($this->categoria))
+{
+?>
+<div id="categorie-lista" class="categorie lista page ui-widget-content ui-corner-all">
+    <div id="categorie-lista-risali" class="lista-risali">
+        <a href="<?php echo $this->url(array('controller' => 'categorie', 'action' => 'list'));?>" id="esploraCategoria<?php echo $this->categoria['idCategoriaPadre'];?>" class="esploraCategoria">Torna Su</a>
+    </div>
+    <div id="categorie-lista-titolo" class="lista-titolo">
+        Lista sottocategorie di: <?php echo $this->categoria['Nome']; ?>
+    </div>
+    <?php
+    if(count($this->sottoCategorie))
+    {
+    ?>
+        <table id="lista-tabella" class="lista-tabella">
+    <?php
+    }
+    else
+    {
+    ?>
+        <div id="categorie-lista-vuota" class="lista-vuota">
+            Nessuna sottocategoria per la categoria selezionata.
+        </div>
+    <?php
+    }
+    ?>
+<?php
+}
+else
+{
+?>
+<div id="categorie-lista" class="lista page ui-widget-content ui-corner-all">
+    <div id="categorie-lista-titolo" class="lista-titolo">
+        Lista categorie
+    </div>
+    <table id="categorie-lista-tabella" class="lista-tabella">
+<?php
+}
+?>
+<?php
+if(count($this->sottoCategorie))
+{
+?>
+        <tr>
+            <th>Nome:</th>
+            <th>Azioni:</th>
+        </tr>
+        <?php
+            echo $this->partialLoop('/categorie/partials/categoriaList.phtml', $this->sottoCategorie);
+        ?>
+    </table>
+<?php
+}
+?>
+</div>
+<script type="text/javascript">
+    $.sortableOptions = {
+        helper: function(e, tr) {
+             var $originals = tr.children();
+             var $helper = tr.clone();
+             $helper.children().each(function(index)
+             {
+               // Set helper cell sizes to match the original sizes
+               $(this).width($originals.eq(index).width())
+             });
+             return $helper;
+        },
+        distance: 10,
+        axis: 'y',
+        containment: 'parent',
+        items: '.lista-riga',
+        update : function () {
+            $('.lista-tabella tbody').sortable('disable');
+            var orderIds = $('.lista-tabella tbody').sortable('toArray');
+            var order = new Array(orderIds.length);
+            for(var i=0; i<orderIds.length; i++)
+                order[i] = orderIds[i].replace('categorie-lista-riga','');
+
+            $.post('<?php echo $this->url(array('controller' => 'categorie', 'action' => 'newOrder'));?>', {order: order, ajax: true}, function() { UpdateCategoria('<?php echo $this->url(array('controller' => 'categorie', 'action' => 'getSelectOptions')); ?>'); $('.lista-tabella tbody').sortable('enable');});
+        }
+    };
+    if($.browser.mozilla)
+        $.extend($.sortableOptions, {revert: 100})
+        
+    $('.lista-tabella tbody').sortable($.sortableOptions).disableSelection();
+    
+    $('.esploraCategoria').bind('click',function() {
+        categoriaPadre = $(this).attr('id').replace('esploraCategoria','');
+        if(categoriaPadre == '')
+            setCategoria(null);
+        $.address.parameter('Categoria', categoriaPadre);
+        $.address.parameter('action','List-Categorie');
+        updateHash();
+        return false;
+    });
+
+    $('.editaCategoria').button().bind('click',function() {
+        $.address.parameter('GestisciCategoria',$(this).attr('id').replace('editaCategoria',''));
+        $.address.parameter('action','Edit-Categorie');
+        updateHash();
+        return false;
+    });
+
+    $('.eliminaCategoria').button().bind('click',function(e) {
+        if(!$(e.currentTarget).hasClass('disabled'))
+        {
+            window.stopUpdate = true;
+            $.address.parameter('GestisciCategoria',$(this).attr('id').replace('eliminaCategoria',''));
+            $.address.parameter('dialog','eliminaCategoria');
+            updateHash();
+            window.stopUpdate = false;
+        }
+        return false;
+    });
+
+    $('.attivaCategoria').button().bind('click',function() {
+        $.post($(this).attr('href'), {'ajax': true, 'gestiscicategoria' : $(this).attr('id').replace('attivaCategoria','')}, function(){ updateHash(); UpdateCategoria('<?php echo $this->url(array('controller' => 'categorie', 'action' => 'getSelectOptions')); ?>');});
+        return false;
+    });
+
+    $('.disattivaCategoria').button().bind('click',function() {
+        $.post($(this).attr('href'), {'ajax': true, 'gestiscicategoria' : $(this).attr('id').replace('disattivaCategoria','')}, function(){ updateHash(); UpdateCategoria('<?php echo $this->url(array('controller' => 'categorie', 'action' => 'getSelectOptions')); ?>'); });
+        return false;
+    });
+
+    function openeliminaCategoria()
+    {
+        idCategoria = $.address.parameter('GestisciCategoria');
+        $('<div id=categoria-delete-dialog-container class=dialog-container></div>').hide().appendTo('body').load($('.eliminaCategoria').attr('href'),{ajax: true, gestiscicategoria : idCategoria}, function()
+        {
+            canDelete = $('#conferma').length;
+            if(canDelete)
+                dialogButtons = {
+                                    'Si' : function() {
+                                        $('#formDelete').submit();
+                                    },
+                                    'No' : function() {
+                                        $(this).dialog('close');
+                                    }
+                };
+            else
+                dialogButtons = {
+                                    'Chiudi' : function() {
+                                            $(this).dialog('close');
+                                    }
+                };
+            $('#categoria-delete-dialog-container').dialog({
+                modal: true,
+                position: 'center',
+                width: 'auto',
+                title: 'Elimina Categoria',
+                close: function(){ $(this).dialog('destroy'); $('#categoria-delete-dialog-container').remove(); $.address.parameter('GestisciCategoria', ''); closeDialog();},
+                buttons: dialogButtons
+            });
+        });
+    }
+</script>

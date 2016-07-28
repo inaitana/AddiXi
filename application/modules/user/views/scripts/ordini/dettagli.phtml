@@ -1,0 +1,59 @@
+<div id="dettagliordine-lista" class="dettagliordine lista">
+    <?php if(!$this->ajax)
+    {
+    ?>
+        <table id="dettagliordine-lista-tabella" class="lista-tabella">
+            <tr>
+                <th>Numero:</th>
+                <th>Data:</th>
+                <th>SubTotale:</th>
+                <th>Spedizione:</th>
+                <th>Totale:</th>
+                <th>Stato:</th>
+            </tr>
+            <tr id="rigaOrdine<?php echo $this->vendita['idVendita'];?>" class="rigaOrdine">
+                <td id="dettagliordine-lista-numero<?php echo $this->idVendita;?>" class="lista-numero">
+                    <?php echo $this->vendita['Numero']; ?>
+                </td>
+                <td id="dettagliordine-lista-data<?php echo $this->vendita['idVendita'];?>" class="lista-data">
+                    <?php echo date('d/m/Y',strtotime($this->vendita['Data'])); ?>
+                </td>
+                <td id="dettagliordine-lista-subTotale<?php echo $this->vendita['idVendita'];?>" class="lista-subTotale">
+                    <?php echo new Zend_Currency(array('value' => $this->vendita['SubTotale'])); ?>
+                    </td>
+                <td id="dettagliordine-lista-spedizione<?php echo $this->vendita['idVendita'];?>" class="lista-spedizione">
+                    <div id="spedizione" class="clickToInput money"><?php echo new Zend_Currency(array('value' => $this->vendita['Costo Spedizione'])); ?></div>
+                </td>
+                <td id="dettagliordine-lista-totale<?php echo $this->vendita['idVendita'];?>" class="lista-totale">
+                    <?php echo new Zend_Currency(array('value' => $this->vendita['Totale'],2)); ?>
+                </td>
+                <td id="dettagliordine-lista-stato<?php echo $this->vendita['idVendita'];?>" class="lista-stato">
+                    <?php
+                    if(!$this->vendita['Confermata'])
+                       echo "Non Accettato";
+                    else
+                    {
+                        if(!$this->vendita['Evasa'])
+                            echo "Accettato non evaso";
+                        else
+                            echo "Evaso";
+                    }
+                    ?>
+                </td>
+            </tr>
+        </table>
+    <?php
+    }
+    ?>
+    <table id="vociordine-lista-tabella" class="lista-tabella">
+        <tr>
+            <th>Descrizione:</th>
+            <th>Quantità:</th>
+            <th>Prezzo:</th>
+            <th>Importo:</th>
+        </tr>
+        <?php
+            echo $this->partialLoop('/ordini/partials/lineaVenditaList.phtml', $this->lineeVendita);
+        ?>
+    </table>
+</div>

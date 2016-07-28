@@ -1,0 +1,12 @@
+<div id="categorie-edita" class="categorie edita page ui-widget-content ui-corner-all">
+    <div id="categorie-edita-titolo" class="edita-titolo">
+        Edita Categoria "<?php echo $this->categoria['Nome']; ?>"
+    </div>
+    <div id="categorie-edita-form" class="edita-form">
+        <?php
+            echo $this->form;
+            echo $this->formAjaxify($this->form->getAttrib('id'),'Categoria',null,'Categoria',$this->url(array('controller' => 'categorie', 'action' => 'getSelectOptions')));
+        ?>
+    </div>
+</div>
+<?php echo $this->CKEditor(); ?>

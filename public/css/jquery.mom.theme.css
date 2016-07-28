@@ -1,0 +1,220 @@
+/* Stile dello sfondo superiore */
+ul.mom
+{
+    background-color: #FFFFFF
+}
+
+/* Stile del pulsante dell'orb menu */
+ul.mom .orb
+{
+    height: 25px;
+    width: 94px;
+}
+
+/* Stile dell'header dell'orb menu */
+ul.mom .orb .orb-header
+{
+    height: 25px;
+    
+    /* For WebKit (Safari, Google Chrome etc) */
+    background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#9d9d9d));
+    /* For Mozilla/Gecko (Firefox etc) */
+    background: -moz-linear-gradient(top, #FFFFFF, #9d9d9d);
+    /* For Internet Explorer 5.5 - 7 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#FFFFFFFF, endColorstr=#FF9d9d9d);
+    /* For Internet Explorer 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#FFFFFFFF, endColorstr=#FF9d9d9d)";
+}
+
+/* Stile dell'orb menu */
+ul.mom .orb .orb-menu
+{
+    width: 450px;
+
+    background-color: #EFF5FA;
+    border-color: #8492a6;
+    
+    -moz-box-shadow: 2px 3px 4px #818181; /* Firefox */
+    -webkit-box-shadow: 2px 3px 4px #818181; /* Safari, Chrome */
+    box-shadow: 2px 3px 4px #818181; /* CSS3 */
+}
+
+/* Stile della parte sinistra dell'orb menu */
+ul.mom .orb .orb-menu .orb-left
+{
+    width: 224px;
+    
+    background-color: #FFFFFF;
+    border-right: 1px solid #CFDBEB;
+}
+
+/* Stile dei pulsanti della parte sinistra dell'orb menu (bisogna dargli il bordo bianco, in modo che nell'hover il bordo non esca fuori dal nulla cambiando le dimensioni) */
+ul.mom .orb .orb-menu .orb-left > ul > li
+{
+    border: 1px solid #FFFFFF;
+}
+
+/* Stile dei pulsanti della parte sinistra dell'orb menu on hover (niente gradiente css, ad IE non piace)*/
+ul.mom .orb .orb-menu .orb-left > ul > li:hover
+{
+    border: 1px solid #FFB700;
+    background-image: url('/css/images/mom/gradientePulsanti.png');
+}
+
+/* Stile delle etichette dei pulsanti della parte sinistra dell'orb menu */
+ul.mom .orb .orb-menu .orb-left > ul > li > a > span
+{
+    font-size: 11px;
+}
+
+/* Stile del separatore dei pulsanti dell'orb menu */
+ul.mom .orb .orb-menu .orb-left hr
+{
+    width: 100%;
+    margin:4px 0 4px -5px;
+    
+    color: #8492a6;
+}
+
+/* Stile della parte destra dell'orb menu */
+ul.mom .orb .orb-menu .orb-right
+{
+    width: 225px;
+}
+
+/* Stile del blocco delle tab */
+ul.mom .menu
+{
+    padding-left: 110px;
+    margin-top: -24px;
+}
+
+/* Stile dei titoli delle tab */
+ul.mom .menu > li > a, ul.mom .menu > li > a:visited {
+    padding-top: 3px;
+    height: 20px;
+    width: 75px;
+    
+    color: #222222;
+    font-size: 13px;
+    text-align: center;
+    
+    -moz-box-shadow: 4px 5px 4px #818181; /* Firefox */
+    -webkit-box-shadow: 4px 5px 4px #818181; /* Safari, Chrome */
+    box-shadow: 4px 5px 4px #818181; /* CSS3 */
+}
+
+/* Stile della barra grande (niente gradiente css, ad IE non piace)*/
+ul.mom .menu .submenu
+{
+    height: 90px;
+    left: 0px;
+    padding-left: 0px;
+    width: 100%;
+
+    border-top: 1px solid #8db2e3;
+    border-bottom: 1px solid #9FAEC2;
+    background-image: url('/css/images/mom/gradienteMenu.png');
+}
+
+/* Stile dei gruppi di pulsanti */
+ul.mom .menu .submenu > li
+{
+    margin-top: 5px;
+	padding: 0px 5px 0px 5px;
+    border-right: 1px solid #abc;
+}
+
+/* Stile dei pulsanti */
+ul.mom .menu .submenu > li > div
+{
+    padding: 5px;
+    margin: 2px;
+}
+
+/* Stile dei pulsanti onhover */
+ul.mom .menu .submenu > li > div:hover
+{
+    padding: 4px;
+    
+    border: 1px solid #FFBB00;
+    background-image: url('/css/images/mom/gradientePulsanti.png');
+}
+
+/* Stile delle etichette dei pulsanti */
+ul.mom .menu .submenu > li > div > a {
+    color: #000000;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+/* Stile delle etichette dei pulsanti disabilitati */
+ul.mom .menu .submenu > li > div > a.disabled {
+    color: #777777;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+/* Stile delle immagini dei pulsanti */
+ul.mom .menu .submenu > li > div > a > img{
+    padding-bottom: 1px;
+}
+
+/* Stile delle etichette per i gruppi di pulsanti */
+ul.mom .menu .submenu > li > h2
+{
+    margin-top: 65px;
+    
+	font-family: Calibri;
+	font-size: 12px;
+	font-weight: normal;
+    color: #FFFFFF;
+}
+
+/* Stile delle etichette delle select */
+ul.mom .momSelect
+{
+    width: 200px;
+    font-size: 12px;
+}
+
+/* Stile delle select */
+ul.mom .momSelect > ul {
+    width: 300px;
+    padding: 0;
+    max-height: 500px;
+
+    background: black;
+    
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.8;
+    opacity: 0.8;
+}
+
+/* Stile dei separatori delle select */
+ul.mom .momSelect > ul > li {
+    line-height: 1.7em;
+    padding: 0px 12px;
+
+    font-size: 11px;
+    border-bottom: 1px dashed white;
+}
+
+/* Stile dei link delle select */
+ul.mom .momSelect ul a {
+    color: #DDDDDD;
+}
+
+/* Stile dei link delle select on hover */
+ul.mom .momSelect ul a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+/* Stile delle finestre jquery dialog */
+.ui-dialog
+{
+    -moz-box-shadow: 4px 5px 4px #818181; /* Firefox */
+    -webkit-box-shadow: 4px 5px 4px #818181; /* Safari, Chrome */
+    box-shadow: 4px 5px 4px #818181; /* CSS3 */
+}

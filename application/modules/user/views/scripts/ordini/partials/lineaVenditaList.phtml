@@ -1,0 +1,15 @@
+<?php $class = $this->partialCounter%2==0?"pari":"dispari";?>
+<tr id="vociordine-lista-riga<?php echo $this->idLinea;?>" class="lista-riga <?php echo $class;?>">
+    <td id="vociordine-lista-descrizione<?php echo $this->idLinea;?>" class="lista-descrizione">
+        <?php echo $this->Descrizione; ?>
+    </td>
+    <td id="vociordine-lista-quantità<?php echo $this->idLinea;?>" class="lista-quantità">
+        <?php echo $this->{'Quantità'}; ?>
+    </td>
+    <td id="vociordine-lista-prezzo<?php echo $this->idLinea;?>" class="lista-prezzo">
+        <?php echo new Zend_Currency(array('value' => $this->{'Prezzo vendita unitario'},2)); ?>
+    </td>
+    <td id="vociordine-lista-importo<?php echo $this->idLinea;?>" class="lista-importo">
+        <?php echo new Zend_Currency(array('value' => $this->Importo,2)); ?>
+    </td>
+</tr>

@@ -1,0 +1,45 @@
+<?php if(!$this->ajax) echo $this->partial('/catalogo/partials/navigazioneCatalogo.phtml');?>
+<div id="articoli">
+    <div id="categoria<?php echo $this->categoria->idCategoria;?>">
+        <div id="datiCategoria<?php echo $this->categoria->idCategoria;?>" class="datiCategoria">
+            <h3 id="nomeCategoria<?php echo $this->categoria->idCategoria;?>" class="nomeCategoria">
+                <?php echo $this->categoria->getNome(); ?>
+            </h3>
+            <h4 id="descrizioneCategoria<?php echo $this->categoria->idCategoria;?>" class="descrizioneCategoria">
+                <?php echo $this->categoria->getDescrizione(); ?>
+            </h4>
+        </div>
+        <div id="articoliCategoria<?php echo $this->categoria->idCategoria;?>" class="articoliCategoria">
+            <?php
+                if(count($this->articoli))
+                    echo $this->partialLoop('/catalogo/partials/articoloLista.phtml', $this->articoli);
+                else
+                {
+                 ?>
+                    <p>Nessun articolo in questa categoria</p>
+                 <?php
+                }
+            ?>
+        </div>
+        <div id="paginazioneCategoria<?php echo $this->categoria->idCategoria;?>" class="paginazioneCategoria">
+            <?php
+                echo $this->paginationControl($this->paginator,
+                                                    'Elastic',
+                                                    'catalogo/partials/paginazioneCategoria.phtml');
+            ?>
+        </div>
+    </div>
+</div>
+<?php
+if($this->layout()->config->breadcrumb->separateAjax==false && $this->ajax)
+{
+?>
+    <div id="newbreadcrumb" style="display: none">
+    <?php echo $this->navigation()->breadcrumbs()->setMinDepth(0)->setRenderInvisible(true);?>
+    </div>
+<?php
+}
+?>
+<script type="text/javascript">
+    $("#articoli input[type='submit']").button();
+</script>

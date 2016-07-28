@@ -1,0 +1,30 @@
+<p>Gentile <?php echo $this->data['Nome'].' '.$this->data['Cognome']; ?>,</p>
+<p>La sua registrazione presso il negozio online di <?php echo $this->nomeNegozio; ?> è stata accettata.</p>
+<p>La invitiamo a conservare in maniera sicura le sue credenziali d'accesso.</p>
+<p>Le riepiloghiamo i dati da lei forniti:</p>
+<ul>
+<?php
+    foreach($this->data as $key => $data)
+    {
+        if($key != 'Password')
+        {
+?>
+            <li>
+                <strong><?php echo $key?>:</strong> <em><?php echo $data?></em>
+            </li>
+<?php
+        }
+    }
+?>
+    <li>
+        <strong>Data della registrazione:</strong> <?php echo $this->now->format('d/m/Y H:i:s'); ?>
+    </li>
+</ul>
+<p>
+    Per attivare il suo account è necessario utilizzare il seguente codice di attivazione quando richiesto:
+    <em><?php echo $this->activationCode ?></em>,
+    o in alternativa visitare direttamente l'indirizzo
+    <a href='<?php echo $this->serverUrl().$this->url(array('module' => 'user', 'controller' => 'login', 'action' => 'activate')).'?user='.$this->data['Nome Utente'].'&code='.$this->activationCode; ?>'>
+        <?php echo $this->serverUrl().$this->url(array('module' => 'user', 'controller' => 'login', 'action' => 'activate')).'?user='.$this->data['Nome Utente'].'&code='.$this->activationCode; ?>
+    </a>
+</p>

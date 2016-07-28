@@ -1,0 +1,50 @@
+
+<?php
+    if($this->success)
+        echo 0;
+    else
+    {
+?>
+    <div id='pannelloSeo' class="main">
+        <div id='pannelloSeo-titoloBase'>
+            <div id='pannelloSeo-titoloBase-text'>
+                 Titolo di base delle pagine:
+            </div>
+            <div id='pannelloSeo-titoloBase-form'>
+                <form method="post" action="<?php echo $this->url(array('module' => 'admin', 'controller' => 'SEO', 'action' => 'changeTitle')); ?>" id="formSEO">
+                    <input type="text" class="ui-widget-content ui-corner-all" name="titoloBase" size="30" value="<?php echo $this->TitoloBase; ?>"/>
+                </form>
+            </div>
+        </div>
+        <div id="pannelloSeo-aggiornaSitemap">
+            <div id="pannelloSeo-aggiornaSitemap-text">
+                Aggiorna la Sitemap sui motori di ricerca:
+            </div>
+            <div id="pannelloSeo-aggiornaSitemap-motori">
+                <?php
+                echo $this->partialLoop('/seo/partials/motoreRicercaList.phtml', $this->MotoriDiRicerca);
+                ?>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $('.InvioSitemap').submit(function(){
+                idForm = $(this).attr('id');
+                $.post($(this).attr('action'),{ajax: true, idMotore: $(this).children(':input[name="idMotore"]').val()}, function(data) {
+                    if(data == '')
+                        $('<span class=\'errors\'>Invio Fallito</span>').insertAfter($('#' + idForm +' :submit')).fadeOut(2500);
+                    else
+                    {
+                        $('<span class=\'success\'>Invio Riuscito</span>').insertAfter($('#' + idForm +' :submit')).fadeOut(2500);
+                        $('#ultimo' + idForm).html(data);
+                    }
+                });
+                return false;
+            })
+            $('#pannelloSeo-aggiornaSitemap-motori :submit').button();
+        </script>
+    </div>
+<?php
+
+    echo $this->formAjaxify('formSEO',null,null,null,null,true);
+    }
+?>

@@ -1,0 +1,411 @@
+/************
+ * Generali *
+ ************/
+
+#catalogo {
+    padding: 10px 0;
+}
+
+#catalogo a {
+    text-decoration: none;
+}
+
+#catalogo a:hover {
+    text-decoration: underline;
+}
+
+#catalogo form {
+    background: none;
+    border: none;
+    padding: 0;
+    display: inline;
+    margin: 10px;
+}
+
+#catalogo form.login .required:after
+{
+    content:"";
+}
+
+#catalogo form .required:after
+{
+    color: red;
+    content: " *";
+}
+
+#catalogo fieldset {
+    padding: 10px 0px 20px 20px;
+}
+
+#catalogo textarea {
+    color: black;
+}
+
+#catalogo input {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    height: auto;
+    color: #000000;
+    background-color: #FFFFFF;
+    border: 1px solid #0000BB;
+    padding: 0px 2px 2px 2px;
+}
+
+#catalogo input[type=submit] {
+    font-size: 11px;
+    color: #0000BB;
+    background-color: #D1D1D1;
+    height: 25px;
+    padding: 0px 5px 2px 5px;
+}
+
+#catalogo input.largeButton {
+    width: 150px;
+    margin-top: 5px;
+}
+
+#catalogo input[readonly]
+{
+    color: gray;
+}
+
+#catalogo .hidden, #catalogo #hidden-label, #catalogo #hidden-element
+{
+    display: none;
+}
+
+#catalogo dd, #catalogo dt, #catalogo dl {
+    margin: 0;
+    padding: 0;
+}
+
+#contenitore {
+    padding: 0 20px;
+}
+
+#contenitore h4 {
+    padding-top: 5px;
+}
+
+.chiusura {
+    clear: both;
+}
+
+/***************
+ *  Login Box  *
+ ***************/
+
+#loginBox {
+    text-align: right;
+    font-size: 12px;
+    width: 100%;
+    padding-bottom: 5px;
+}
+
+#loginBox dd, #loginBox dt, #loginBox dl, #loginBox label, #loginBox form, #loginBox input, #loginBox div {
+    display: inline;
+}
+
+#loginBox a, #loginBox a:visited {
+    color: #0000BB;
+    padding: 0px 2px;
+}
+
+#loginBox dt {
+    padding-left: 5px;
+}
+
+#loginBox #loginForm {
+    margin: 0;
+    margin-right: 10px;
+}
+
+#loginBox #loginForm input {
+    font-size: 11px;
+}
+
+#loginBox #loginForm input[type="submit"] {
+    height: auto;
+}
+
+#loginBox #loginForm .inputFocus {
+    background-color: #DDFFFF;
+    outline: 3px double #DDFFFF;
+}
+
+/*************
+ *  Testata  *
+ *************/
+
+#testata {
+    clear: both;
+    background-color: #FFFFCC;
+    padding-top: 5px;
+    padding-left: 15px;
+}
+
+#testata #breadcrumb {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    float: left;
+    width: 568px;
+    padding-top: 10px;
+}
+
+#testata #breadcrumb a {
+    color: #0000BB;
+}
+
+#testata #carrello {
+    margin-left: 568px;
+}
+
+#testata #carrello #linkApriCarrello {
+	color: black;
+}
+
+#testata #carrello #carrelloArticoli {
+    position: absolute;
+    margin-top: 5px;
+    width: 345px;
+}
+
+#testata #carrello #imgApriCarrello{
+    border: 0;
+    width: 20px;
+    float: right;
+}
+
+#testata #carrello #dettaglioCarrello {
+    position: absolute;
+    padding-top: 2px;
+    background-color: #FFFFCC;
+    filter: alpha(opacity=90);
+    -moz-opacity: 0.9;
+    opacity: 0.9;
+	text-align: center;
+    width: 376px;
+}
+
+#testata #carrello #tabellaCarrello
+{
+    margin: auto;
+}
+
+#testata #carrello #tabellaCarrello tr.totaleCarrello td {
+    border-top: 1px solid black;
+}
+
+/***************************
+ *  Navigazione Categorie  *
+ ***************************/
+
+#navigazione {
+    width: 280px;
+    float: left;
+}
+
+ul.navigation {
+    margin: 5px 10px;
+    padding: 0;
+}
+
+ul.navigation ul {
+    display: none;
+	list-style: none outside none;
+    margin: 5px 20px;
+    padding: 0;
+}
+
+ul.navigation li.active > ul {
+    display: block;
+}
+
+a.catalogo, a.catalogo:visited {
+	color: #0000BB;
+}
+
+/**************
+ *  Catalogo  *
+ **************/
+
+#articoli {
+    width: 600px;
+    float: right;
+}
+
+#articoli .datiCategoria {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    padding-top: 10px;
+    padding-left: 25px;
+    margin-left: 25px;
+}
+
+#articoli .datiCategoria .nomeCategoria {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0;
+}
+
+#articoli .datiCategoria .descrizioneCategoria {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: italic;
+}
+
+#articoli p
+{
+    padding: 10px;
+    margin: 0;
+}
+
+/******************************
+ *  Lista Articoli Categoria  *
+ ******************************/
+
+#articoli .articoloLista {
+    border: 1px dotted silver;
+    background-color: white;
+    width:500px;
+    padding:25px;
+    margin:25px;
+    float:left;
+}
+
+#articoli .articoloLista .immagineArticoloLista {
+    width:100px;
+    float:left;
+}
+
+#articoli .articoloLista .immagineArticoloLista .imgArticoloLista {
+    width:100px;
+}
+
+#articoli .articoloLista .datiArticoloLista {
+    float:left;
+    padding-left:10px;
+}
+
+/* Non c'è sempre, dipende dal config */
+#articoli .articoloLista .aggiungiArticoloLista {
+    clear: left;
+}
+
+#articoli .articoloLista .aggiungiArticoloLista #articoloAggiunto {
+    color: #0000BB;
+}
+
+#articoli .articoloLista .articoloOfferta .prezzoArticoloLista {
+    color: blue;
+}
+
+/*********************
+ *  Pagina Articolo  *
+ *********************/
+
+#articoli .articolo {
+    border: 1px dotted silver;
+    background-color: white;
+    width:500px;
+    padding:25px;
+    margin:25px;
+    float:left;
+}
+
+#articoli .articolo .immagineArticolo {
+    width:100px;
+    float:left;
+}
+
+#articoli .articolo .immagineArticolo .imgArticolo {
+    width:100px;
+}
+
+#articoli .articolo .datiArticolo {
+    float:left;
+    padding-left:10px;
+}
+
+#articoli .articolo .datiArticolo .marcaArticolo {
+	font-weight: normal;
+    font-size: 100%;
+    padding: 0;
+}
+
+#articoli .articolo .datiArticolo .nomeArticolo {
+	font-weight: bold;
+    font-size: 100%;
+    padding: 0;
+}
+
+#articoli .articolo .datiArticolo .prezzoArticolo {
+	font-weight: bold;
+}
+
+#articoli .articolo .datiArticolo .quantitàArticolo {
+	font-weight: bold;
+}
+
+#articoli .articolo .descrizioneArticolo img {
+    max-height: 400px;
+    max-width: 400px;
+}
+
+#articoli .articolo .aggiungiArticolo {
+    clear: left;
+}
+
+#articoli .articolo .aggiungiArticolo #articoloAggiunto {
+    color: #0000BB;
+}
+
+#articoli .articolo .articoloOfferta .prezzoArticolo {
+    color: blue;
+}
+
+/*********************
+ *  Pagina Carrello  *
+ *********************/
+
+#checkoutCarrello {
+	padding:30px;
+}
+
+#checkoutCarrello-text {
+    font-weight: bold;
+    font-style: italic;
+    padding: 2px;
+}
+
+#tabellaCheckout tr.totaleCheckout td {
+    border-top: 1px solid black;
+}
+
+#tabellaCheckout form {
+    margin: 0;
+    padding: 0;
+}
+
+#tabellaCheckout dd, #tabellaCheckout dt, #tabellaCheckout dl {
+    display: inline;
+}
+
+#checkoutCarrello #checkoutForm {
+    display: block;
+}
+
+#checkoutCarrello #checkoutForm input[type=submit], #confermaOrdine #formConfermaOrdine input[type=submit] {
+    display: block;
+    width: 150px;
+    font-size: 15px;
+    padding: 0px 5px 2px 5px;
+}
+
+#confermaOrdine #formConfermaOrdine input[type=checkbox] {
+    border: none;
+}
+
+#chiusura {
+    clear: both;
+}

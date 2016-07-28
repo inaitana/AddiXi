@@ -1,0 +1,42 @@
+<?php if(!$this->ajax) echo $this->partial('/catalogo/partials/navigazioneCatalogo.phtml');?>
+<div id="articoli">
+    <div id="marca<?php echo $this->marca->idMarca;?>">
+        <div id="datiMarca<?php echo $this->marca->idMarca;;?>" class="datiMarca">
+            <h3 id="nomeMarca<?php echo $this->marca->idMarca;?>" class="nomeMarca">
+                <?php echo $this->marca->Nome; ?>
+            </h3>
+        </div>
+        <div id="articoliMarca<?php echo $this->marca->idMarca;?>" class="articoliMarca">
+            <?php
+                if(count($this->articoli))
+                    echo $this->partialLoop('/catalogo/partials/articoloLista.phtml', $this->articoli);
+                else
+                {
+                 ?>
+                    <p>Nessun articolo per questa marca</p>
+                 <?php
+                }
+            ?>
+        </div>
+        <div id="paginazioneMarca<?php echo $this->marca->idMarca;?>" class="paginazioneMarca">
+            <?php
+                echo $this->paginationControl($this->paginator,
+                                                    'Elastic',
+                                                    'catalogo/partials/paginazioneCategoria.phtml');
+            ?>
+        </div>
+    </div>
+</div>
+<?php
+if($this->layout()->config->breadcrumb->separateAjax==false && $this->ajax)
+{
+?>
+    <div id="newbreadcrumb" style="display: none">
+    <?php echo $this->navigation()->breadcrumbs()->setMinDepth(0)->setRenderInvisible(true);?>
+    </div>
+<?php
+}
+?>
+<script type="text/javascript">
+    $("#articoli input[type='submit']").button();
+</script>

@@ -1,0 +1,19 @@
+<div id="info" class="main">
+    <div id="info-logo">
+        <img id="info-imglogo" title="AddiXi" alt="AddiXi" src="/css/images/AddiXi.png"/>
+    </div>
+    <div id="info-versione-AddiXi">
+        AddiXi versione <?php echo Zend_Registry::get('config')->version; ?>
+    </div>
+    <div id="info-versione-AddiXi">
+        (Zend Framework v.<?php echo Zend_Version::VERSION ?>)
+    </div>
+    <div id="info-negozio">
+        per <?php echo Zend_Registry::get('config')->shopName; ?>
+    </div>
+    <div id="info-contatori">
+        <div>Totale Categorie: <?php echo $this->countCategorie; ?></div>
+        <div>Totale Articoli: <?php echo $this->countArticoli; ?></div>
+        <div>Totale Ordini: <?php echo $this->countVendite; ?></div>
+    </div>
+</div>

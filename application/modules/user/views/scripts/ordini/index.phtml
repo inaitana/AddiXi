@@ -1,0 +1,46 @@
+<?php
+if(count($this->vendite)==0)
+{
+?>
+<h4>Non risulta nessun ordine effettuato col suo account presso il nostro negozio.</h4>
+<?php
+}
+else
+{
+?>
+    <div id="ordini-lista" class="ordini lista">
+        <div id="ordini-lista-titolo" class="lista-titolo">
+            Lista Ordini
+        </div>
+        <table id="ordini-lista-tabella" class="lista-tabella">
+            <tr>
+                <th>Numero:</th>
+                <th>Data:</th>
+                <th>SubTotale:</th>
+                <th>Spedizione:</th>
+                <th>Totale:</th>
+                <th>Stato:</th>
+                <th>&nbsp;</th>
+            </tr>
+            <?php
+                echo $this->partialLoop('/ordini/partials/venditaList.phtml', $this->vendite);
+            ?>
+        </table>
+    </div>
+    <script type="text/javascript">
+        $('.dettagliOrdine').live('click',
+                                        function(){
+                                            id = $(this).attr('id').replace('dettagliOrdine','');
+                                            if($('#ordini-lista-dettagli'+ id + ' > td').is(':empty'))
+                                            {
+                                                $('#ordini-lista-dettagli'+ id + ' > td').load($(this).attr('href'),{ajax : true});
+                                                $('#ordini-lista-dettagli'+ id).show();
+                                            }
+                                            else $('#ordini-lista-dettagli'+ id).toggle();
+                                            return false;
+                                        }
+                                     );
+    </script>
+<?php
+}
+?>

@@ -1,0 +1,27 @@
+<div id="articoli-dialog-elimina" class="articoli elimina dialog main">
+    <?php
+    if($this->canDelete)
+    {
+    ?>
+    <div id="articoli-dialog-elimina-testo" class="elimina-testo">
+        <p>Attenzione: hai scelto di eliminare l'articolo "<?php echo $this->articolo['Nome']; ?>".</p>
+        <p>Confermi l'operazione?</p>
+        <div id="articoli-dialog-elimina-form" class="elimina-form">
+        <?php
+            echo $this->form;
+            echo $this->formAjaxify($this->form->getAttrib('id'),'Categoria');
+        ?>
+        </div>
+    </div>
+    <?php
+    }
+    else
+    {
+    ?>
+    <div id="categorie-dialog-elimina-testo" class="elimina-testo">
+        <p>Attenzione: L'articolo "<?php echo $this->articolo['Nome']; ?>" è già presente in almeno un ordine effettuato da un cliente, per cui non è più possibile eliminarlo.</p>
+    </div>
+    <?php
+    }
+    ?>
+</div>

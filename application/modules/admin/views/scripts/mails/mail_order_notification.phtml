@@ -1,0 +1,32 @@
+<style>
+    li{
+        font-size: 13px;
+    }
+</style>
+<p>Salve <?php echo $this->cliente->Nome.' '.$this->cliente->Cognome; ?>,</p>
+<?php
+if($this->type == 'modify')
+{
+?>
+<p>La avvisiamo che il suo ordine presso <?php echo $this->nomeNegozio; ?> è stato modificato.</p>
+<?php
+}
+else if($this->type == 'confirm')
+{
+?>
+<p>La avvisiamo che il suo ordine presso <?php echo $this->nomeNegozio; ?> è stato accettato.</p>
+<?php
+}
+else if($this->type == 'ship')
+{
+?>
+<p>La avvisiamo che il suo ordine presso <?php echo $this->nomeNegozio; ?> è stato inviato in data odierna.</p>
+<?php
+}
+?>
+<p></p>
+<?php
+    echo $this->riassuntoOrdine($this->idVendita);
+?>
+
+<p>La invitiamo a contattarci per ogni dubbio o domanda, e la ringraziamo per essersi servito presso il nostro negozio.</p>

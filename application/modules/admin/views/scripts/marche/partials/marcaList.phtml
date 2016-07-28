@@ -1,0 +1,13 @@
+<?php $class = $this->partialCounter%2==0?"pari":"dispari";?>
+<tr id="articoli-lista-riga<?php echo $this->idMarca;?>" class="lista-riga <?php echo $class;?>">
+    <td id="marche-lista-nome<?php echo $this->idMarca;?>" class="lista-nome">
+        <?php echo $this->Nome; ?>
+    </td>
+    <td id="marche-lista-sito<?php echo $this->idMarca;?>" class="lista-sito">
+        <a href="<?php echo $this->Sito;?>" id="linkSitoMarca<?php echo $this->idMarca;?>" target="_blank" class="sitoMarca"><?php echo $this->Sito; ?></a>
+    </td>
+    <td id="marche-lista-azioni<?php echo $this->idMarca;?>" class="lista-azioni">
+        <a href="<?php echo $this->url(array('controller' => 'marche', 'action' => 'edit'));?>" id="editaMarca<?php echo $this->idMarca;?>" class="editaMarca">Edita</a>
+        <a href="<?php echo $this->url(array('controller' => 'marche', 'action' => 'delete'));?>" id="eliminaMarca<?php echo $this->idMarca;?>" class="eliminaMarca">Elimina</a>
+    </td>
+</tr>

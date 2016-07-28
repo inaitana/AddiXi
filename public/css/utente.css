@@ -1,0 +1,227 @@
+/************
+ * Generali *
+ ************/
+
+#utente {
+    padding: 10px 0;
+}
+
+#utente a {
+    text-decoration: none;
+}
+
+#utente a:hover {
+    text-decoration: underline;
+}
+
+#utente form {
+    background: none;
+    border: none;
+    padding: 0;
+    display: inline;
+    margin: 10px;
+}
+
+#utente form.login .required:after
+{
+    content:"";
+}
+
+#utente form .required:after
+{
+    color: red;
+    content: " *";
+}
+
+#utente fieldset {
+    padding: 10px 0px 20px 20px;
+}
+
+#utente input {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    color: #000000;
+    background-color: #FFFFFF;
+    border: 1px solid #0000BB;
+    padding: 0px 2px 2px 2px;
+}
+
+#utente input[type=submit] {
+    font-size: 15px;
+    color: #0000BB;
+    background-color: #D1D1D1;
+    padding: 2px 5px 2px 5px;
+    width: 150px;
+    margin-top: 5px;
+}
+
+#utente input[readonly]
+{
+    color: gray;
+}
+
+#utente .hidden, #utente #hidden-label, #utente #hidden-element
+{
+    display: none;
+}
+
+#utente dd, #utente dt, #utente dl {
+    margin: 0;
+    padding: 0;
+}
+
+#contenitore {
+    padding: 0 20px;
+}
+
+/***************
+ *  Login Box  *
+ ***************/
+
+#loginBox {
+    text-align: right;
+    font-size: 12px;
+    width: 100%;
+    padding-bottom: 5px;
+}
+
+#loginBox dd, #loginBox dt, #loginBox dl, #loginBox label, #loginBox form, #loginBox input, #loginBox div {
+    display: inline;
+}
+
+#loginBox a, #loginBox a:visited {
+    color: #0000BB;
+    padding: 0px 2px;
+}
+
+#loginBox dt {
+    padding-left: 5px;
+}
+
+#loginBox #loginForm {
+    margin: 0;
+    margin-right: 10px;
+}
+
+#loginBox #loginForm input {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    height: auto;
+    color: #000000;
+    background-color: #FFFFFF;
+    border: 1px solid #0000BB;
+    padding: 0px 2px 2px 2px;
+}
+
+#loginBox #loginForm input[type=submit] {
+    color: #0000BB;
+    background-color: #D1D1D1;
+    height: auto;
+    width: auto;
+    padding: 0px 5px 2px 5px;
+}
+
+#loginBox #loginForm .inputFocus {
+    background-color: #DDFFFF;
+    outline: 3px double #DDFFFF;
+}
+
+/*************
+ *  Testata  *
+ *************/
+
+#testata {
+    background-color: #FFFFCC;
+    padding: 10px 15px;
+}
+
+#testata #breadcrumb {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#testata #breadcrumb a {
+    color: #0000BB;
+}
+
+/***************
+ *  Contenuto  *
+ ***************/
+
+#contenitore h4 {
+    padding-top: 5px;
+}
+
+#contenitore a {
+    color: #0000BB;
+}
+
+#contenitore #lostPasswordShow
+{
+    display: block;
+    padding-top: 5px;
+}
+
+
+
+/******************
+ *  Pagine lista  *
+ ******************/
+
+.lista-titolo
+{
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;
+    margin: 10px 0 0;
+}
+
+.lista-tabella
+{
+    margin: 10px auto;
+    min-width: 700px;
+    font-size: 16px;
+	border-collapse: collapse;
+    background: white;
+}
+
+.lista-tabella th
+{
+	border: 3px double #222222;
+	background: #DDDDDD;
+	padding: 3px 0.6em;
+}
+
+.lista-riga
+{
+	text-align: left;
+    height: 25px;
+	background: #F9F9F9;
+}
+
+.lista-riga.dispari
+{
+	background: #FFFFFF;
+}
+
+.lista-riga td
+{
+	border: 3px double #CCCCCC;
+	padding: 3px 0.6em;
+}
+
+.lista-nome
+{
+}
+
+.lista-azioni
+{
+    text-align: center;
+}
+
+.lista-azioni a
+{
+    padding: 0px 2px;
+}

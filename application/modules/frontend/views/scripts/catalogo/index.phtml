@@ -1,0 +1,37 @@
+<?php if(!$this->ajax) echo $this->partial('/catalogo/partials/navigazioneCatalogo.phtml');?>
+<div id="articoli">
+    <div id="categoria<?php echo $this->categoria->idCategoria;?>">
+        <div id="datiCategoriaHome" class="datiCategoria">
+            Prodotti in evidenza:
+        </div>
+        <div id="articoliCategoria<?php echo $this->categoria->idCategoria;?>" class="articoliCategoria">
+            <?php
+                if(count($this->articoli))
+                    echo $this->partialLoop('/catalogo/partials/articoloLista.phtml', $this->articoli);
+                else
+                {
+                 ?>
+                    <p>Nessun prodotto in evidenza</p>
+                 <?php
+                }
+            ?>
+        </div>
+        <div id="paginazioneCategoria<?php echo $this->categoria->idCategoria;?>" class="paginazioneCategoria">
+            <?php
+                echo $this->paginationControl($this->paginator,
+                                                    'Elastic',
+                                                    'catalogo/partials/paginazioneCategoria.phtml');
+            ?>
+        </div>
+    </div>
+</div>
+<?php
+if($this->layout()->config->breadcrumb->separateAjax==false && $this->ajax)
+{
+?>
+    <div id="newbreadcrumb" style="display: none">
+    <?php echo $this->navigation()->breadcrumbs()->setMinDepth(0)->setRenderInvisible(true);?>
+    </div>
+<?php
+}
+?>

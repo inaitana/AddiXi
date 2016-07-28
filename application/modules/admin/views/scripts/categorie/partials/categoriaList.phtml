@@ -1,0 +1,24 @@
+<?php $class = $this->partialCounter%2==0?"pari":"dispari";?>
+<tr id="categorie-lista-riga<?php echo $this->idCategoria;?>" class="lista-riga <?php echo $class;?>">
+    <td id="categorie-lista-nome<?php echo $this->idCategoria;?>" class="lista-nome">
+        <a href="<?php echo $this->url(array('controller' => 'categorie', 'action' => 'list'));?>" id="esploraCategoria<?php echo $this->idCategoria;?>" class="esploraCategoria"><?php echo $this->Nome; ?></a>
+    </td>
+    <td id="categorie-lista-azioni<?php echo $this->idCategoria;?>" class="lista-azioni">
+        <a href="<?php echo $this->url(array('controller' => 'categorie', 'action' => 'edit'));?>" id="editaCategoria<?php echo $this->idCategoria;?>" class="editaCategoria">Edita</a>
+        <a href="<?php echo $this->url(array('controller' => 'categorie', 'action' => 'delete'));?>" id="eliminaCategoria<?php echo $this->idCategoria;?>" class="eliminaCategoria">Elimina</a>
+<?php
+if($this->Attivo == true)
+{
+?>
+        <a href="<?php echo $this->url(array('controller' => 'categorie', 'action' => 'deactivate'));?>" id="disattivaCategoria<?php echo $this->idCategoria;?>" class="disattivaCategoria attiva">Disattiva</a>
+<?php
+}
+else
+{
+?>
+        <a href="<?php echo $this->url(array('controller' => 'categorie', 'action' => 'activate'));?>" id="attivaCategoria<?php echo $this->idCategoria;?>" class="attivaCategoria attiva">Attiva</a>
+<?php
+}
+?>
+    </td>
+</tr>

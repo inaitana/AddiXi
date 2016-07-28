@@ -1,0 +1,39 @@
+<?php $class = $this->partialCounter%2==0?"pari":"dispari";?>
+<tr id="ordini-lista-riga<?php echo $this->idVendita;?>" class="lista-riga <?php echo $class;?>">
+    <td id="ordini-lista-numero<?php echo $this->idVendita;?>" class="lista-numero">
+        <?php echo $this->Numero; ?>
+    </td>
+    <td id="ordini-lista-data<?php echo $this->idVendita;?>" class="lista-data">
+        <?php echo date('d/m/Y',strtotime($this->Data)); ?>
+    </td>
+    <td id="ordini-lista-subTotale<?php echo $this->idVendita;?>" class="lista-subTotale">
+        <?php echo new Zend_Currency(array('value' => $this->SubTotale)); ?>
+    </td>
+    <td id="ordini-lista-spedizione<?php echo $this->idVendita;?>" class="lista-spedizione">
+        <?php echo new Zend_Currency(array('value' => $this->{'Costo Spedizione'})); ?>
+    </td>
+    <td id="ordini-lista-totale<?php echo $this->idVendita;?>" class="lista-totale">
+        <?php echo new Zend_Currency(array('value' => $this->Totale)); ?>
+    </td>
+
+
+    <td id="ordini-lista-stato<?php echo $this->idVendita;?>" class="lista-stato">
+        <?php
+        if(!$this->Confermata)
+           echo "Non Accettato";
+        else
+        {
+            if(!$this->Evasa)
+                echo "Accettato non evaso";
+            else
+                echo "Evaso";
+        }
+        ?>
+    </td>
+    <td id="ordini-lista-azioni<?php echo $this->idVendita;?>" class="lista-azioni">
+        <a id="dettagliOrdine<?php echo $this->idVendita?>" href="<?php echo $this->url(array('module' => 'user', 'controller' => 'ordini', 'action' => 'dettagli', 'ordine' => $this->idVendita));?>" class="dettagliOrdine">Dettagli</a>
+    </td>
+</tr>
+<tr id="ordini-lista-dettagli<?php echo $this->idVendita?>" class="lista-dettagli" style="display:none">
+    <td colspan="7"></td>
+</tr>

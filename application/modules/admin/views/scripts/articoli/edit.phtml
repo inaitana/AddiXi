@@ -1,0 +1,50 @@
+<div id="articoli-edita" class="articoli edita page ui-widget-content ui-corner-all">
+    <div id="articoli-edita-titolo" class="edita-titolo">
+        Edita Articolo "<?php echo $this->articolo['Nome']; ?>"
+    </div>
+    <div id="articoli-edita-form" class="edita-form">
+
+    <img id="form-immagine" class='imgPreview edita-immagine' src='<?php echo $this->image; ?>' class='imgPreview imgArticoloLista' alt='<?php echo basename($this->image); ?>' title='<?php echo basename($this->image); ?>'/>
+
+<?php
+    echo $this->form;
+    echo $this->formAjaxify($this->form->getAttrib('id'),'Categoria');
+?>
+    </div>
+</div>
+
+<?php echo $this->CKEditor(); ?>
+<script type="text/javascript">    
+    $('img.imgPreview').xTooltip({tooltipClass: 'imgPreviewBox'});
+    function mostraNuovaMarca(status)
+    {
+        if(status)
+        {
+            $('#NuovaMarca-element').show();
+            $('#NuovaMarca-label').show();
+            if($('#NuovaMarca').val()=='hidden')
+                $('#NuovaMarca').val('');
+        }
+        else
+        {
+            $('#NuovaMarca').val('hidden');
+            $('#NuovaMarca-element').hide();
+            $('#NuovaMarca-label').hide();
+        }
+    }
+    $(function(){
+        if($('#NuovaMarca').val()=='hidden')
+            mostraNuovaMarca(false);
+        else
+            mostraNuovaMarca(true);
+
+        $('#idMarca').change(
+            function(){
+                if($(this).val()=='nuova')
+                    mostraNuovaMarca(true);
+                else
+                    mostraNuovaMarca(false);
+            }
+        );
+    });
+</script>

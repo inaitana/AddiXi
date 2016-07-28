@@ -1,0 +1,24 @@
+<?php $class = $this->partialCounter%2==0?"pari":"dispari";?>
+<tr id="vociordine-lista-riga<?php echo $this->idLinea;?>" class="lista-riga <?php echo $class;?>">
+    <td id="vociordine-lista-descrizione<?php echo $this->idLinea;?>" class="descrizioneLineaOrdineList">
+        <?php echo $this->Descrizione; ?>
+    </td>
+    <td id="vociordine-lista-quantità<?php echo $this->idLinea;?>" class="lista-quantità">
+        <div id="quantità<?php echo $this->idLinea;?>" class="clickToInput quantity" title="Quantità Disponibile: <?php echo $this->Disponibile?>"><?php echo $this->{'Quantità'}; ?></div>
+        <input type="hidden" id="disponibile<?php echo $this->idLinea;?>" name="disponibile<?php echo $this->idLinea;?>" value="<?php echo $this->Disponibile?>"/>
+    </td>
+    <td id="vociordine-lista-prezzo<?php echo $this->idLinea;?>" class="lista-prezzo">
+        <div id="prezzo<?php echo $this->idLinea;?>" class="clickToInput money"><?php echo new Zend_Currency(array('value' => $this->{'Prezzo vendita unitario'})); ?></div>
+    </td>
+    <td id="vociordine-lista-importo<?php echo $this->idLinea;?>" class="lista-importo">
+        <div id="importo<?php echo $this->idLinea;?>" class="importoLineaOrdine"><?php echo new Zend_Currency(array('value' => $this->Importo)); ?></div>
+    </td>
+    <td id="vociordine-lista-stato<?php echo $this->idLinea;?>" class="lista-stato">
+        <?php
+        if($this->Sospesa)
+           echo "In sospeso";
+        else
+           echo "OK";
+        ?>
+    </td>
+</tr>

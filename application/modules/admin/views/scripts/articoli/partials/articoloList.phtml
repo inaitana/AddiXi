@@ -1,0 +1,36 @@
+<?php $class = $this->partialCounter%2==0?"pari":"dispari";?>
+<tr id="articoli-lista-riga<?php echo $this->idArticoloSpecifico;?>" class="lista-riga <?php echo $class;?>">
+    <td id="articoli-lista-codice<?php echo $this->idArticoloSpecifico;?>" class="lista-codice">
+        <?php echo $this->{'Codice Articolo'}; ?>
+    </td>
+    <td id="articoli-lista-marca<?php echo $this->idArticoloSpecifico;?>" class="lista-marca">
+        <?php echo $this->Marca; ?>
+    </td>
+    <td id="articoli-lista-nome<?php echo $this->idArticoloSpecifico;?>" class="lista-nome">
+        <?php echo $this->Nome; ?>
+    </td>
+    <td id="articoli-lista-prezzo<?php echo $this->idArticoloSpecifico;?>" class="lista-prezzo">
+        <?php if($this->{'Prezzo di vendita'} == null) $this->{'Prezzo di vendita'} = 0; echo new Zend_Currency(array('value' => $this->{'Prezzo di vendita'}));?>
+    </td>
+    <td id="articoli-lista-quantità<?php echo $this->idArticoloSpecifico;?>" class="lista-quantità">
+        <?php echo $this->Quantità ?>
+    </td>
+    <td id="articoli-lista-azioni<?php echo $this->idArticoloSpecifico;?>" class="lista-azioni">
+        <a href="<?php echo $this->url(array('action' => 'edit'));?>" id="editaArticolo<?php echo $this->idArticoloSpecifico;?>" class="editaArticolo">Edita</a>
+        <a href="<?php echo $this->url(array('action' => 'delete'));?>" id="eliminaArticolo<?php echo $this->idArticoloSpecifico;?>" class="eliminaArticolo">Elimina</a>
+<?php
+if($this->Attivo == true)
+{
+?>
+        <a href="<?php echo $this->url(array('action' => 'deactivate'));?>" id="disattivaArticolo<?php echo $this->idArticoloSpecifico;?>" class="attiva disattivaArticolo">Disattiva</a>
+<?php
+}
+else
+{
+?>
+        <a href="<?php echo $this->url(array('action' => 'activate'));?>" id="attivaArticolo<?php echo $this->idArticoloSpecifico;?>" class="attiva attivaArticolo">Attiva</a>
+<?php
+}
+?>
+    </td>
+</tr>

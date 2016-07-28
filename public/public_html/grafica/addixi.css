@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+body {
+    font-family: Tahoma, arial, sans-serif;
+    font-size: 1em;
+    text-align: center;
+    background-image: url("sfondo.jpg");
+    margin: 15px 0px;
+}
+
+a, a:visited {
+    color: #3377FF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline
+}
+
+h1 {
+    font-family: "Trebuchet MS", Tahoma, Sans-serif;
+    font-weight: normal;
+    font-size: 190%;
+    padding: 10px;
+    margin: 0;
+}
+
+h2 {
+    font-family: "Trebuchet MS", Tahoma, Sans-serif;
+    font-weight: bold;
+    font-size: 1.9em;
+    padding:10px 0 0 10px;
+    color: #3377FF;
+    margin: 0;
+}
+
+h3 {
+    font-family: "Trebuchet MS", Tahoma, Sans-serif;
+    font-weight: bold;
+    font-size: 130%;
+    padding: 0 10px;
+    margin: 0;
+    text-transform: uppercase;
+    color:#777777;
+}
+
+ul {
+    list-style: none outside none;
+}
+
+#top-bg {
+    background: url("top-bg.png") repeat-y scroll center top transparent;
+    height: 25px;
+    margin: auto;
+    width: 990px;
+}
+
+#wrap {
+    text-align: left;
+    margin: 0px auto;
+    width: 990px;
+    background: url("content.png") repeat-y scroll center top transparent;
+}
+
+#content-wrap {
+    background: none repeat scroll 0 0 #F6F6F6;
+    border-bottom: 2px solid #D0D0D0;
+    margin-left: 15px;
+    margin-top: 5px;
+    padding: 0;
+    width: 960px;
+}
+
+#header {
+    background: url("header.png") no-repeat scroll center center #CCCCCC;
+    height:231px;
+    margin:0 auto;
+    width:968px;
+}
+
+#nav {
+    background: url("nav.jpg") repeat-x scroll 0 0 transparent;
+    width: 968px;
+    margin: 0 11px;
+    height: 36px;
+}
+
+#nav ul li {
+    float: left;
+}
+
+#nav ul li a {
+    border-right: 2px solid #006FB4;
+    color: #FFFFFF;
+    font: bold 13px/2.8em "Century Gothic","Trebuchet MS",Helvetica,Arial,Geneva,sans-serif;
+    letter-spacing: 1px;
+    padding: 0 14px;
+    display: block;
+    text-transform: uppercase;
+}
+
+#nav ul li#attivo a {
+    background: url(nav-current.jpg) repeat-x;
+}
+
+#main {
+    margin: 0 10px 20px;
+    padding-top: 10px;
+    width: 940px;
+}
+
+#footer-wrap {
+    font-size: 95%;
+    padding-top: 15px;
+    text-align: left;
+    width: 990px;
+}
+
+#footer-wrap a {
+    color:#777777;
+}
+
+#footer-wrap a:hover {
+    color: #000000;
+    text-decoration: none;
+}
+
+#footer-columns {
+    margin: 0 auto;
+    width: 900px;
+}
+
+#footer-columns ul {
+    background: url("footer-dots.jpg") repeat-x scroll left top transparent;
+    margin: 10px 0 0;
+}
+
+#footer-columns li {
+    background: url("footer-dots.jpg") repeat-x left bottom;
+}
+
+#footer-columns LI A {
+    display: block;
+    padding: 4px 10px;
+}
+
+#footer-columns .col3 {
+    width: 32%;
+    float: left
+}
+
+#footer-columns .col3-center {
+    margin: 0px 15px;
+}
+
+#footer-bottom {
+    clear: both;
+    color: #777777;
+    padding-top: 10px;
+    text-align: center;
+    width: 990px;
+}
+
+#footer-bg {
+    background: url(bottom-bg.png) no-repeat center bottom;
+    height: 25px;
+    margin: auto;
+    width: 990px;
+}

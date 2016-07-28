@@ -1,0 +1,29 @@
+<?php
+    $menu = $this->tabMenu();
+    
+    if (Zend_Registry::get('configAdmin')->images->kcfinder)
+        $this->KCFinder();
+    
+    echo $this->doctype();
+?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php
+            $settings = new Application_Model_Impostazioni();
+            echo $this->headTitle("AddiXi ".Zend_Registry::get('config')->version." | ".$settings->get('Titolo Base'));
+        ?>
+        <?php echo $this->headLink()->appendStylesheet('/css/admin.css'); ?>
+        <?php echo $this->headScript(); ?>
+        <?php echo $this->jQuery();?>
+    </head>
+    <body>
+        <?php echo $menu; ?>
+        <div id="content" class="main">
+            <?php echo $this->layout()->content ?>
+        </div>
+        <div id="footer">
+            <?php echo $this->userStatus();?> AddiXi <?php echo Zend_Registry::get('config')->version; ?> © 2010<?php if(date('Y')!=2010) echo "-".date('Y');?>
+        </div>
+    </body>
+</html>

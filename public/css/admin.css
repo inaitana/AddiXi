@@ -1,0 +1,532 @@
+/******************
+ *    Generali    *
+ ******************/
+
+body
+{
+    background-color: #F3F3F3;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+#content
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.page
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    min-height: 300px;
+    -moz-box-shadow: 1px 1px 3px #818181; /* Firefox */
+    -webkit-box-shadow: 1px 1px 3px #818181; /* Safari, Chrome */
+    box-shadow: 1px 1px 3px #818181; /* CSS3 */
+}
+
+#footer
+{
+    width: 1000px;
+    text-align: center;
+    margin: auto;
+    font-size: 13px;
+}
+
+input
+{
+    padding: 5px;
+    margin-top: 1px;
+    margin-bottom: 5px;
+}
+
+.hidden, #hidden-label, #hidden-element, #submit-label
+{
+    display: none;
+}
+
+#submit-element
+{
+    margin-top: 10px;
+}
+
+img
+{
+    border: 0;
+}
+
+/* Aggiungo l'asterisco a fianco ai campi richiesti delle form */
+form .required:after
+{
+    color: red;
+    content: " *";
+}
+
+/* Tranne che nella form di login */
+form.login .required:after
+{
+    content:"";
+}
+
+/* Errori */
+.errors
+{
+    color: red;
+}
+
+/* Successi */
+.success
+{
+    color: green;
+}
+
+a, a:visited
+{
+    color: #222222;
+    text-decoration: none;
+}
+
+/* Caricamento in corso... */
+.loading-growl-container
+{
+    position: absolute;
+    top:0px;
+    z-index: 999;
+    width: 100%;
+}
+
+.loading-growl
+{
+	opacity: 0.97;
+    background-color: #111111;
+    color: #DDDDDD;
+    margin: auto;
+    width: 175px;
+    -moz-box-shadow: 2px 2px 4px #818181; /* Firefox */
+    -webkit-box-shadow: 2px 2px 4px #818181; /* Safari, Chrome */
+    box-shadow: 2px 2px 4px #818181; /* CSS3 */
+}
+
+.loading-growl img
+{
+    margin:3px 4px 0 3px;
+}
+
+.loading-growl span
+{
+    display:inline-block;
+    margin-bottom:1px;
+}
+
+/******************
+ *   Area Login   *
+ ******************/
+
+#login-container
+{
+    margin: auto;
+    text-align: center;
+    width: 380px;
+    font-size: 14px;
+    -moz-box-shadow: 1px 1px 3px #818181; /* Firefox */
+    -webkit-box-shadow: 1px 1px 3px #818181; /* Safari, Chrome */
+    box-shadow: 1px 1px 3px #818181; /* CSS3 */
+}
+
+#login-imglogo
+{
+    width: 300px;
+    padding-top: 10px;
+}
+
+#login-text
+{
+    padding-top: 10px;
+}
+
+#login-form
+{
+    text-align: left;
+    margin: 0px 40px 10px 40px;
+}
+
+#login-errors
+{
+    text-align: center;
+}
+
+#login-form fieldset
+{
+    margin: 0px;
+    border: 1px solid #CCCCCC;
+    padding: 8px;
+}
+
+/* Necessari per sovrascrivere gli stili di default per le form di ZF */
+#login-form dd, #login-form dl
+{
+    margin: 0px;
+}
+
+#login-form input
+{
+    width: 268px;
+}
+
+#login-form input[type='submit']
+{
+    width: 280px;
+}
+
+#login-links
+{
+    padding-bottom: 5px;
+}
+
+#login-links a
+{
+    text-decoration: underline;
+}
+
+
+/******************
+ *   Promemoria   *
+ ******************/
+
+.promemoria
+{
+    margin: 10px;
+}
+
+.promemoria li
+{
+    margin: 5px 0px;
+}
+
+.promemoria .promemoria-numero
+{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.promemoria-tooltip
+{
+    display: none;
+    position: absolute;
+	opacity: 0.97;
+    z-index: 999;
+    -moz-box-shadow: 3px 4px 4px #818181; /* Firefox */
+    -webkit-box-shadow: 3px 4px 4px #818181; /* Safari, Chrome */
+    box-shadow: 3px 4px 4px #818181; /* CSS3 */
+    max-height: 600px;
+    overflow: auto;
+}
+
+.promemoria-tooltip a
+{
+    display: block;
+    text-decoration: underline;
+}
+
+.promemoria-lista
+{
+    list-style: none;
+    padding: 2px 5px;
+}
+
+
+/******************
+ *  Finestra Info *
+ ******************/
+
+#info
+{
+    text-align: center;
+}
+
+#info-imglogo
+{
+    width: 250px;
+    padding-top: 10px;
+}
+
+#info-contatori
+{
+    text-align: left;
+    padding-top: 10px;
+}
+
+
+/******************
+ *  Finestra SEO  *
+ ******************/
+
+#pannelloSeo-titoloBase
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.pannelloSeo-aggiornaSitemap-motore
+{
+    padding-top: 5px;
+}
+
+.pannelloSeo-aggiornaSitemap-motore-nome
+{
+    text-align: center;
+}
+
+.pannelloSeo-aggiornaSitemap-motore-form
+{
+    text-align: center;
+}
+
+/******************
+ *  Pagine lista  *
+ ******************/
+
+.lista-titolo
+{
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;
+    margin: 10px 0 0;
+}
+
+.lista-risali
+{
+    text-align: center;
+    margin: 5px 0 0;
+}
+
+.lista-vuota
+{
+    margin-top:10px;
+    text-align:center;
+}
+
+.lista-tabella
+{
+    margin: 10px auto;
+    min-width: 700px;
+    font-size: 16px;
+	border-collapse: collapse;
+    background: white;
+}
+
+.lista-tabella th
+{
+	border: 3px double #222222;
+	background: #DDDDDD;
+	padding: 3px 0.6em;
+}
+
+.lista-riga
+{
+	text-align: left;
+    height: 25px;
+	background: #F9F9F9;
+}
+
+.lista-riga.dispari
+{
+	background: #FFFFFF;
+}
+
+.lista-riga td
+{
+	border: 3px double #CCCCCC;
+	padding: 3px 0.6em;
+}
+
+.lista-nome
+{
+	min-width: 190px;
+}
+
+.lista-azioni
+{
+    min-width: 245px;
+    text-align: center;
+}
+
+.lista-azioni a
+{
+    padding: 0px 2px;
+}
+
+
+.lista-azioni .ui-button .ui-button-text
+{
+    padding: 0.02em 0.2em;
+}
+
+.lista-azioni .attiva .ui-button-text
+{
+    min-width: 4.5em;
+}
+
+/*******************
+ * Pagine aggiungi *
+ *******************/
+
+.aggiungi-titolo
+{
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;
+    margin: 10px 0 0;
+}
+
+.aggiungi-immagine
+{
+    margin-top: 20px;
+    width: 200px;
+}
+
+.aggiungi-form
+{
+    margin-left: 30px;
+}
+
+.aggiungi-form dt
+{
+    margin: 8px 0;
+}
+
+/******************
+ *  Pagine edita  *
+ ******************/
+
+.edita-titolo
+{
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;
+    margin: 10px 0 0;
+}
+
+.edita-immagine
+{
+    margin-top: 20px;
+    width: 200px;
+}
+
+.edita-form
+{
+    margin-left: 30px;
+}
+
+.edita-form dt
+{
+    margin: 8px 0;
+}
+
+/******************
+ * Dialog elimina *
+ ******************/
+
+.elimina
+{
+    text-align: left;
+}
+
+.elimina-testo p
+{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.elimina-form dd, .elimina-form dl
+{
+    margin:0;
+}
+
+/*********************
+ * Tabelle in dialog *
+ *********************/
+
+
+.dialog-tabella
+{
+    margin: 10px auto;
+    font-size: 16px;
+	border-collapse: collapse;
+    background: white;
+}
+
+.dialog-tabella th
+{
+	border: 3px double #222222;
+	background: #DDDDDD;
+	padding: 3px 0.6em;
+    text-align: left;
+}
+
+.dialog-tabella td
+{
+	border: 3px double #CCCCCC;
+	padding: 3px 0.6em;
+}
+
+
+/******************
+ *   Categorie    *
+ ******************/
+
+#categorie-lista-tabella .lista-riga
+{
+    cursor: move;
+}
+
+
+/******************
+ *    Articoli    *
+ ******************/
+
+
+
+/******************
+ *     Marche     *
+ ******************/
+
+
+
+/******************
+ *     Ordini     *
+ ******************/
+
+.ordini-filtro-cliente
+{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.dettagliordine form
+{
+    display: inline;
+}
+
+.dettagliordine form input
+{
+    display: block;
+    margin: 10px auto;
+}
+
+.dettagliordine .lista-tabella input
+{
+    margin: 0;
+}
+
+#cliente-principale-dialog-testo
+{
+    padding: 10px 0px 5px 0px;
+}
+
+.ui-autocomplete
+{
+	max-height: 500px;
+    overflow: scroll;
+}

@@ -1,0 +1,51 @@
+.xTooltip
+{
+    display: none;
+    position: absolute;
+	opacity: 0.97;
+    z-index: 999;
+}
+
+.xTooltip h3
+{
+    display: block;
+    margin: 0;
+    text-align: center;
+}
+
+.imgPreviewBox
+{
+    background-color: #111111;
+    -moz-box-shadow: 3px 4px 4px #818181; /* Firefox */
+    -webkit-box-shadow: 3px 4px 4px #818181; /* Safari, Chrome */
+    box-shadow: 3px 4px 4px #818181; /* CSS3 */
+}
+
+.imgPreviewBox img
+{
+    padding: 1px;
+}
+
+.imgPreviewBox h3
+{
+    font-size: 16px;
+    font-weight: bold;
+    color: #DDDDDD;
+    padding: 2px 5px;
+}
+
+.tooltipBox
+{
+    background-color: #111111;
+    -moz-box-shadow: 2px 2px 4px #818181; /* Firefox */
+    -webkit-box-shadow: 2px 2px 4px #818181; /* Safari, Chrome */
+    box-shadow: 2px 2px 4px #818181; /* CSS3 */
+}
+
+.tooltipBox h3
+{
+    font-size: 16px;
+    font-weight: bold;
+    color: #DDDDDD;
+    padding: 2px 5px;
+}

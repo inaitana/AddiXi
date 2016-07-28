@@ -1,0 +1,14 @@
+<?php
+    if($this->showForm)
+    {   
+        echo "Per attivare il suo account è necessario inserire il codice di conferma che le è stato inviato all'indirizzo email indicato.";
+        echo $this->form;
+    }
+    else
+    {
+        if($this->success)
+            echo "La sua registrazione è stata confermata con successo.";
+        else
+            echo "Il codice di attivazione fornito è errato, o non esiste un utente da attivare con questo nome.";
+    }
+?>
