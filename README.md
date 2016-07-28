@@ -1,3 +1,5 @@
+![Logo](https://raw.githubusercontent.com/inaitana/AddiXi/development/public/css/images/AddiXi.png)
+
 # AddiXi
 AddiXi is a CMS for e-commerce, developed between 2010 and 2011, when there weren't many feature-rich alternatives. It was my first project with Zend Framework.
 
